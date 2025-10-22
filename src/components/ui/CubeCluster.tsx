@@ -26,7 +26,7 @@ const CubeCluster = () => {
   // Generate clustered cube positions
   for (let x = -2; x <= 2; x++) {
     for (let y = -2; y <= 2; y++) {
-      for (let z = -2; z <= 2; z++) {
+      for (let z = -1; z <= 1; z++) {
         if (Math.random() > 0.7) cubes.push([x, y, z]);
       }
     }
@@ -34,15 +34,15 @@ const CubeCluster = () => {
 
   return (
     <Canvas camera={{ position: [6, 6, 6], fov: 45 }}>
-      <ambientLight intensity={0.6} />
-      <directionalLight intensity={2} position={[5, 5, 5]} />
+      <ambientLight intensity={3} />
+      <directionalLight intensity={2} position={[1, 7, 7]} />
       <Suspense fallback={null}>
         {cubes.map((pos, i) => (
           <Cube key={i} position={pos} />
         ))}
         <Environment preset="sunset" />
       </Suspense>
-      <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1.5} />
+      <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={3.5} />
     </Canvas>
   );
 };

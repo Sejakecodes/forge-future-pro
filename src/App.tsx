@@ -18,6 +18,7 @@ import JobApplications from "./pages/JobApplications";
 import ReviewFreelancer from "./pages/ReviewFreelancer";
 import NotFound from "./pages/NotFound";
 import MentorsDashboard from "./pages/MentorDashboard";
+import ClientsDashboard from "./pages/ClientDashboard";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/job-applications" element={<JobApplications />} />
           <Route path="/review-freelancer" element={<ReviewFreelancer />} />
           <Route path="/Mentor" element={<MentorsDashboard />} />
+          <Route path="/client" element={<ClientsDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

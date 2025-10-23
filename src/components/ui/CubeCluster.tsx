@@ -33,7 +33,7 @@ const CubeCluster = () => {
   }
 
   return (
-    <Canvas camera={{ position: [6, 6, 6], fov: 45 }}>
+    <Canvas camera={{ position: [6, 8, 6], fov: 45 }}>
       <ambientLight intensity={3} />
       <directionalLight intensity={2} position={[1, 7, 7]} />
       <Suspense fallback={null}>

@@ -79,10 +79,12 @@ const Landing = () => {
             {/* Floating Services Sphere */}
             <div className="relative h-[600px] hidden lg:block">
               <div className="absolute inset-0 flex items-center justify-center">
-              
+                <div className="relative w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-100/50 to-purple-200/30 animate-pulse" 
+                     style={{ animationDuration: '3s' }}>
+                  {/* Floating badges */}
                    <CubeCluster />
                  
-              
+                </div>
               </div>
             </div>
           </div>

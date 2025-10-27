@@ -87,10 +87,10 @@ const performanceStats = [
 ];
 
 const RECENT_PROJECTS = [
-  { id: "#2031", title: "Landing Page Design", client: "Jane Cooper", amount: "$540", status: "Completed" },
-  { id: "#2032", title: "Mobile App UI", client: "Robert Fox", amount: "$780", status: "In Progress" },
-  { id: "#2033", title: "Logo & Branding", client: "Jenny Wilson", amount: "$300", status: "Pending" },
-  { id: "#2034", title: "Dashboard Components", client: "Acme Inc", amount: "$1200", status: "Completed" },
+  { id: "#2031", title: "Landing Page Design", client: "Jane Cooper", amount: "R540", status: "Completed" },
+  { id: "#2032", title: "Mobile App UI", client: "Robert Fox", amount: "R780", status: "In Progress" },
+  { id: "#2033", title: "Logo & Branding", client: "Jenny Wilson", amount: "R300", status: "Pending" },
+  { id: "#2034", title: "Dashboard Components", client: "Acme Inc", amount: "R1200", status: "Completed" },
 ];
 
 function statusBadgeClass(status: string) {
@@ -169,7 +169,7 @@ const FreelancerDashboard: React.FC = () => {
                 <CardContent className="p-6 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Total Earnings</p>
-                    <p className="mt-2 text-3xl font-bold">$12,546</p>
+                    <p className="mt-2 text-3xl font-bold">R12,546</p>
                     <div className="mt-2 flex items-center gap-1 text-sm text-success">
                       <TrendingUp className="h-3.5 w-3.5" />
                       <span>+18% this month</span>
@@ -185,7 +185,7 @@ const FreelancerDashboard: React.FC = () => {
                 <CardContent className="p-6 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Available Balance</p>
-                    <p className="mt-2 text-3xl font-bold">$2,340</p>
+                    <p className="mt-2 text-3xl font-bold">R2,340</p>
                     <p className="text-sm text-muted-foreground">Ready for withdrawal</p>
                   </div>
                   <div className="rounded-lg bg-success/10 p-3">
@@ -198,7 +198,7 @@ const FreelancerDashboard: React.FC = () => {
                 <CardContent className="p-6 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Pending Payments</p>
-                    <p className="mt-2 text-3xl font-bold">$860</p>
+                    <p className="mt-2 text-3xl font-bold">R860</p>
                     <p className="text-sm text-muted-foreground">In escrow</p>
                   </div>
                   <div className="rounded-lg bg-warning/10 p-3">
@@ -217,7 +217,7 @@ const FreelancerDashboard: React.FC = () => {
                       <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
                       <p className="mt-2 text-2xl font-bold text-foreground">{stat.value}</p>
                     </div>
-                    <stat.Icon className={`h-6 w-6 ${stat.color}`} />
+                    <stat.Icon className={`h-6 w-6 R{stat.color}`} />
                   </CardContent>
                 </Card>
               ))}
@@ -305,7 +305,7 @@ const FreelancerDashboard: React.FC = () => {
                   <li>✅ Completed project “Landing Page Design” for Jane Cooper</li>
                   <li>💬 Replied to client message (Robert Fox)</li>
                   <li>📤 Submitted proposal for “App UI Design”</li>
-                  <li>💸 Withdrawn $400 to PayPal</li>
+                  <li>💸 Withdrawn R400 to PayPal</li>
                 </ul>
               </CardContent>
             </Card>

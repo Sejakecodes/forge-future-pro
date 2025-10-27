@@ -54,7 +54,7 @@ const ReviewFreelancer = () => {
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
             key={star}
-            className={`h-6 w-6 cursor-pointer transition-colors ${
+            className={`h-6 w-6 cursor-pointer transition-colors R{
               star <= currentRating
                 ? "fill-primary text-primary"
                 : "text-muted-foreground hover:text-primary"

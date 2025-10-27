@@ -75,7 +75,7 @@ const clientStats = [
   { title: "Completed Sessions", value: 22, Icon: Calendar, color: "text-blue-500" },
   { title: "Avg. Rating Given", value: "4.8 ★", Icon: Star, color: "text-yellow-500" },
   { title: "Hours Spent", value: "36h", Icon: Clock, color: "text-green-500" },
-  { title: "Total Spent", value: "$1,250", Icon: CreditCard, color: "text-emerald-600" },
+  { title: "Total Spent", value: "R1,250", Icon: CreditCard, color: "text-emerald-600" },
   { title: "Learning Progress", value: "+18%", Icon: TrendingUp, color: "text-purple-600" },
 ];
 
@@ -202,7 +202,7 @@ const ClientDashboard: React.FC = () => {
                       <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
                       <p className="mt-2 text-2xl font-bold text-foreground">{stat.value}</p>
                     </div>
-                    <stat.Icon className={`h-6 w-6 ${stat.color}`} />
+                    <stat.Icon className={`h-6 w-6 R{stat.color}`} />
                   </CardContent>
                 </Card>
               ))}
@@ -320,7 +320,7 @@ const ClientDashboard: React.FC = () => {
                   <li>💬 Sent message to Dr. Emily Carter about design portfolio feedback.</li>
                   <li>📅 Booked session with John Smith for "Backend APIs in Node.js".</li>
                   <li>⭐ Rated Sara Williams 5 stars for last week’s mentoring session.</li>
-                  <li>💸 Payment processed for mentorship package ($120).</li>
+                  <li>💸 Payment processed for mentorship package (R120).</li>
                 </ul>
               </CardContent>
             </Card>

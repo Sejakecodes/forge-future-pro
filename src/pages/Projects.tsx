@@ -14,7 +14,7 @@ const Projects = () => {
       client: "Sarah Johnson",
       status: "In Progress",
       progress: 65,
-      budget: "$5,000",
+      budget: "R5,000",
       deadline: "2024-04-15",
     },
     {
@@ -23,7 +23,7 @@ const Projects = () => {
       client: "Michael Chen",
       status: "In Progress",
       progress: 80,
-      budget: "$3,200",
+      budget: "R3,200",
       deadline: "2024-04-10",
     },
     {
@@ -32,7 +32,7 @@ const Projects = () => {
       client: "Emma Davis",
       status: "Completed",
       progress: 100,
-      budget: "$1,500",
+      budget: "R1,500",
       deadline: "2024-03-20",
     },
   ];

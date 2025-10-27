@@ -117,7 +117,7 @@ const Wallet = () => {
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Total Balance</p>
                       <p className="mt-2 text-3xl font-bold text-foreground">
-                        ${totalBalance.toLocaleString()}
+                        R{totalBalance.toLocaleString()}
                       </p>
                       <div className="mt-2 flex items-center gap-1 text-sm text-success">
                         <TrendingUp className="h-3.5 w-3.5" />
@@ -137,7 +137,7 @@ const Wallet = () => {
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Available Balance</p>
                       <p className="mt-2 text-3xl font-bold text-foreground">
-                        ${availableBalance.toLocaleString()}
+                        R{availableBalance.toLocaleString()}
                       </p>
                       <p className="mt-2 text-sm text-muted-foreground">
                         Ready to withdraw
@@ -156,7 +156,7 @@ const Wallet = () => {
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Pending Balance</p>
                       <p className="mt-2 text-3xl font-bold text-foreground">
-                        ${pendingBalance.toLocaleString()}
+                        R{pendingBalance.toLocaleString()}
                       </p>
                       <p className="mt-2 text-sm text-muted-foreground">
                         In escrow (3 projects)
@@ -219,11 +219,11 @@ const Wallet = () => {
                         </TableCell>
                         <TableCell className="text-right">
                           <span
-                            className={`font-semibold ${
+                            className={`font-semibold R{
                               txn.type === "credit" ? "text-success" : "text-destructive"
                             }`}
                           >
-                            {txn.type === "credit" ? "+" : "-"}${txn.amount.toLocaleString()}
+                            {txn.type === "credit" ? "+" : "-"}R{txn.amount.toLocaleString()}
                           </span>
                         </TableCell>
                       </TableRow>

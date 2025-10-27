@@ -72,7 +72,7 @@ const mentorStats = [
   { title: "Total Sessions", value: 124, Icon: Calendar, color: "text-blue-500" },
   { title: "Avg. Rating", value: "4.9 ★", Icon: Star, color: "text-yellow-500" },
   { title: "Response Time", value: "45m", Icon: Clock, color: "text-green-500" },
-  { title: "Earnings", value: "$4,230", Icon: DollarSign, color: "text-emerald-600" },
+  { title: "Earnings", value: "R4,230", Icon: DollarSign, color: "text-emerald-600" },
   { title: "Session Growth", value: "+22%", Icon: TrendingUp, color: "text-purple-600" },
 ];
 
@@ -162,7 +162,7 @@ const MentorDashboard: React.FC = () => {
                       <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
                       <p className="mt-2 text-2xl font-bold text-foreground">{stat.value}</p>
                     </div>
-                    <stat.Icon className={`h-6 w-6 ${stat.color}`} />
+                    <stat.Icon className={`h-6 w-6 R{stat.color}`} />
                   </CardContent>
                 </Card>
               ))}

@@ -154,32 +154,63 @@ const FreelancerDashboard = () => {
               </Card>
 
               {/* Analytics Overview */}
-              <Card className="border-border/60 shadow-sm">
-                <CardHeader>
-                  <CardTitle>Analytics Overview</CardTitle>
-                </CardHeader>
-                <CardContent className="flex justify-between">
-                  {[
-                    { label: "Job Success", value: 95, color: "#4F46E5", trail: "#E0E7FF" },
-                    { label: "Review Score", value: 88, color: "#10B981", trail: "#D1FAE5" },
-                    { label: "Response Rate", value: 76, color: "#F59E0B", trail: "#FEF3C7" },
-                  ].map((item) => (
-                    <div key={item.label} className="flex flex-col items-center">
-                      <CircularProgressbar
-                        value={item.value}
-                        text={`${item.value}%`}
-                        styles={buildStyles({
-                          textColor: item.color,
-                          pathColor: item.color,
-                          trailColor: item.trail,
-                        })}
-                        className="w-16"
-                      />
-                      <p className="text-xs mt-2 text-muted-foreground">{item.label}</p>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
+             <Card className="border-border/60 shadow-sm">
+  <CardHeader>
+    <CardTitle>Analytics Overview</CardTitle>
+  </CardHeader>
+
+  <CardContent className="space-y-6">
+    {/* === Circular Indicators Row === */}
+    <div className="flex justify-around items-center">
+      {[
+        { label: "Job Success", value: 95, color: "#4F46E5", trail: "#E0E7FF" },
+        { label: "Review Score", value: 88, color: "#10B981", trail: "#D1FAE5" },
+        { label: "Response Rate", value: 76, color: "#F59E0B", trail: "#FEF3C7" },
+      ].map((item) => (
+        <div key={item.label} className="flex flex-col items-center">
+          <div className="w-16">
+            <CircularProgressbar
+              value={item.value}
+              text={`${item.value}%`}
+              styles={buildStyles({
+                textColor: item.color,
+                pathColor: item.color,
+                trailColor: item.trail,
+              })}
+            />
+          </div>
+          <p className="text-xs mt-2 text-muted-foreground">{item.label}</p>
+        </div>
+      ))}
+    </div>
+
+    {/* === Mini Line/Area Chart === */}
+    <div className="h-40 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={growthData}>
+          <defs>
+            <linearGradient id="colorEarningsMini" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey="month" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
+          <Tooltip />
+          <Area
+            type="monotone"
+            dataKey="earnings"
+            stroke="#6366F1"
+            strokeWidth={2}
+            fill="url(#colorEarningsMini)"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  </CardContent>
+</Card>
+
             </motion.div>
 
             {/* Countries + Requests + Activities */}

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+
 import {
   Select,
   SelectTrigger,
@@ -14,64 +16,42 @@ import {
 
 import { X, Heart } from "lucide-react";
 
-const designs = [
-  {
-    id: 1,
-    title: "Minimal Logo Concept",
-    designer: "Alex M.",
-    category: "Logo Design",
-    image: "/images/designs/logo1.jpg",
-    likes: 124,
-    description:
-      "A minimal logo design for a tech startup. Focused on clean typography and negative space.",
-  },
-  {
-    id: 2,
-    title: "E-commerce App UI",
-    designer: "Sophia Lee",
-    category: "UI/UX",
-    image: "/images/designs/ui1.jpg",
-    likes: 232,
-    description:
-      "Modern e-commerce app UI focusing on smooth user flow and clean layout.",
-  },
-  {
-    id: 3,
-    title: "Coffee Brand Identity",
-    designer: "T. Brown",
-    category: "Branding",
-    image: "/images/designs/branding1.jpg",
-    likes: 89,
-    description:
-      "Full branding package including logo, packaging, and palette for a coffee brand.",
-  },
-  {
-    id: 4,
-    title: "Vector Illustration Pack",
-    designer: "Maria K.",
-    category: "Illustration",
-    image: "/images/designs/illustration1.jpg",
-    likes: 65,
-    description:
-      "A collection of hand-drawn vector illustrations for creative projects.",
-  },
-  // Add more items as needed
-];
-
-const categories = ["All", "Logo Design", "UI/UX", "Branding", "Illustration"];
+// === Categories ===
+const categories = ["Logo Design", "UI/UX", "Branding", "Illustration"];
+const filterCategories = ["All", ...categories];
 const sortOptions = ["Newest", "Most Liked", "A-Z"];
+
+// === Generate 100 Placeholder Designs ===
+const designs = Array.from({ length: 100 }, (_, i) => {
+  const category = categories[i % categories.length];
+  return {
+    id: i + 1,
+    title: `${category} Showcase #${i + 1}`,
+    designer: `Designer ${String.fromCharCode(65 + (i % 26))}`,
+    category,
+    image: `https://source.unsplash.com/random/600x40${i % 9}?sig=${i}`,
+    likes: Math.floor(Math.random() * 200) + 50,
+    description: `A premium ${category.toLowerCase()} design example crafted to demonstrate modern aesthetics.`,
+  };
+});
+
+// === Animations ===
+const fadeIn = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35 } },
+};
 
 export default function CommunityDesigns() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("Newest");
   const [search, setSearch] = useState("");
   const [liked, setLiked] = useState<number[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [visibleCount, setVisibleCount] = useState(16); // initial load count
   const [selectedDesign, setSelectedDesign] = useState<any | null>(null);
 
-  const itemsPerPage = 6;
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // === Filtering & Sorting Logic ===
+  // === Filtering ===
   let filtered = designs.filter(
     (d) =>
       (selectedCategory === "All" || d.category === selectedCategory) &&
@@ -79,17 +59,28 @@ export default function CommunityDesigns() {
         d.designer.toLowerCase().includes(search.toLowerCase()))
   );
 
+  // === Sorting ===
   if (sortBy === "Most Liked") filtered.sort((a, b) => b.likes - a.likes);
   if (sortBy === "A-Z") filtered.sort((a, b) => a.title.localeCompare(b.title));
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedDesigns = filtered.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
-  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  // === Visible list ===
+  const visibleItems = filtered.slice(0, visibleCount);
 
-  // === Like Toggle ===
+  // === Infinite Scroll Observer ===
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) => prev + 12);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const toggleLike = (id: number) => {
     setLiked((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
@@ -97,25 +88,32 @@ export default function CommunityDesigns() {
   };
 
   return (
-    <motion.div className="space-y-8" initial="hidden" animate="show">
-      {/* === Top Controls === */}
+    <motion.div
+      className="space-y-8 pt-6 px-6"
+      variants={fadeIn}
+      initial="hidden"
+      animate="show"
+    >
+      {/* HEADER CONTROLS */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h2 className="text-2xl font-semibold tracking-tight">
           Design Community
         </h2>
+
         <div className="flex flex-wrap items-center gap-3">
           <Input
-            placeholder="Search designs or designers..."
+            placeholder="Search designers or titles..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-56"
+            className="w-64"
           />
+
           <Select onValueChange={setSelectedCategory}>
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="Filter by category" />
+              <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
-              {categories.map((cat) => (
+              {filterCategories.map((cat) => (
                 <SelectItem key={cat} value={cat}>
                   {cat}
                 </SelectItem>
@@ -125,7 +123,7 @@ export default function CommunityDesigns() {
 
           <Select onValueChange={setSortBy}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder="Sort" />
             </SelectTrigger>
             <SelectContent>
               {sortOptions.map((opt) => (
@@ -136,31 +134,37 @@ export default function CommunityDesigns() {
             </SelectContent>
           </Select>
 
-          <Button variant="secondary">Upload Design</Button>
+          <Button className="font-medium">Upload Design</Button>
         </div>
       </div>
 
-      {/* === Design Grid === */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {paginatedDesigns.map((design) => (
+      {/* GRID */}
+      <motion.div
+        layout
+        className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20"
+      >
+        {visibleItems.map((design) => (
           <motion.div
             key={design.id}
+            variants={fadeIn}
+            initial="hidden"
+            animate="show"
             whileHover={{ scale: 1.02 }}
-            className="transition-transform"
           >
-            <Card className="overflow-hidden border-border/60 hover:shadow-lg">
+            <Card className="overflow-hidden border-border/50 hover:shadow-xl transition rounded-lg group">
               <div
-                className="relative h-48 w-full cursor-pointer"
+                className="relative h-56 w-full cursor-pointer"
                 onClick={() => setSelectedDesign(design)}
               >
                 <img
                   src={design.image}
-                  alt={design.title}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full rounded-t-lg"
                 />
-                <Badge className="absolute top-3 left-3 bg-white/80 text-xs font-medium">
+
+                <Badge className="absolute top-3 left-3 bg-white/80 text-xs backdrop-blur-sm">
                   {design.category}
                 </Badge>
+
                 <Button
                   size="icon"
                   variant="ghost"
@@ -171,7 +175,7 @@ export default function CommunityDesigns() {
                   }}
                 >
                   <Heart
-                    className={`w-5 h-5 ${
+                    className={`w-5 h-5 transition ${
                       liked.includes(design.id)
                         ? "text-red-500 fill-red-500"
                         : ""
@@ -187,8 +191,8 @@ export default function CommunityDesigns() {
                 </p>
               </CardHeader>
 
-              <CardContent className="p-4 pt-0 flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">
+              <CardContent className="p-4 pt-0 flex items-center justify-between">
+                <span className="text-muted-foreground text-sm">
                   ❤️ {design.likes + (liked.includes(design.id) ? 1 : 0)}
                 </span>
                 <Button
@@ -202,23 +206,17 @@ export default function CommunityDesigns() {
             </Card>
           </motion.div>
         ))}
+      </motion.div>
+
+      {/* Infinite Scroll Trigger */}
+      <div
+        ref={loadMoreRef}
+        className="h-10 flex justify-center items-center text-muted-foreground text-sm"
+      >
+        Loading more…
       </div>
 
-      {/* === Pagination === */}
-      <div className="flex justify-center gap-2 pt-4">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <Button
-            key={i}
-            size="sm"
-            variant={i + 1 === currentPage ? "default" : "outline"}
-            onClick={() => setCurrentPage(i + 1)}
-          >
-            {i + 1}
-          </Button>
-        ))}
-      </div>
-
-      {/* === Design Modal === */}
+      {/* MODAL */}
       <AnimatePresence>
         {selectedDesign && (
           <motion.div
@@ -236,7 +234,6 @@ export default function CommunityDesigns() {
               <div className="relative">
                 <img
                   src={selectedDesign.image}
-                  alt={selectedDesign.title}
                   className="w-full h-80 object-cover"
                 />
                 <Button
@@ -257,6 +254,7 @@ export default function CommunityDesigns() {
                   by {selectedDesign.designer}
                 </p>
                 <p className="text-sm">{selectedDesign.description}</p>
+
                 <div className="flex justify-between items-center pt-3">
                   <Badge>{selectedDesign.category}</Badge>
                   <Button

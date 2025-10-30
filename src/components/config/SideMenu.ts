@@ -8,6 +8,9 @@ import {
   Star,
   User,
   Settings,
+  Award,
+  Badge,
+  FileBadge,
 } from "lucide-react";
 
 export const sidebarMenu = [
@@ -33,9 +36,9 @@ export const sidebarMenu = [
     label: "Badges",
      defaultOpen: true,
     items: [
-      { label: "Badges ", icon: FolderOpen, path: "/badges" },
-      { label: "Awards", icon: Wallet, path: "/" },
-      { label: "skills", icon: Star, path: "/" },
+      { label: "Badges", icon: Badge, path: "/badges" },
+      { label: "Awards", icon: Award, path: "/" },
+      { label: "skills", icon: FileBadge, path: "/" },
       { label: "skills", icon: Star, path: "/" },
     ],
   },

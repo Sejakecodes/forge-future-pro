@@ -39,7 +39,6 @@ const growthData = [
   { month: "Aug", earnings: 3400, lastMonth: 2900 },
 ];
 
-
 const countries = [
   { name: "USA", revenue: "R3,312" },
   { name: "UK", revenue: "R2,450" },
@@ -48,22 +47,90 @@ const countries = [
 ];
 
 const activities = [
-  { id: 1, text: "Completed project 'Landing Page Design'", time: "2 hours ago", icon: CheckCircle2, color: "bg-green-100 text-green-600" },
-  { id: 2, text: "Replied to client message (Robert Fox)", time: "5 hours ago", icon: MessageSquare, color: "bg-blue-100 text-blue-600" },
-  { id: 3, text: "Submitted proposal for 'App UI Design'", time: "1 day ago", icon: FileText, color: "bg-purple-100 text-purple-600" },
-  { id: 4, text: "Withdrawn R400 to PayPal", time: "3 days ago", icon: DollarSign, color: "bg-yellow-100 text-yellow-600" },
+  {
+    id: 1,
+    text: "Completed project 'Landing Page Design'",
+    time: "2 hours ago",
+    icon: CheckCircle2,
+    color: "bg-green-100 text-green-600",
+  },
+  {
+    id: 2,
+    text: "Replied to client message (Robert Fox)",
+    time: "5 hours ago",
+    icon: MessageSquare,
+    color: "bg-blue-100 text-blue-600",
+  },
+  {
+    id: 3,
+    text: "Submitted proposal for 'App UI Design'",
+    time: "1 day ago",
+    icon: FileText,
+    color: "bg-purple-100 text-purple-600",
+  },
+  {
+    id: 4,
+    text: "Withdrawn R400 to PayPal",
+    time: "3 days ago",
+    icon: DollarSign,
+    color: "bg-yellow-100 text-yellow-600",
+  },
 ];
 
 const projectRequests = [
-  { id: 1, client: "Jane Cooper", title: "E-commerce Redesign", budget: "R2,800", status: "Pending" },
-  { id: 2, client: "Devon Lane", title: "Portfolio Website", budget: "R1,200", status: "Pending" },
+  {
+    id: 1,
+    client: "Jane Cooper",
+    title: "E-commerce Redesign",
+    budget: "R2,800",
+    status: "Pending",
+  },
+  {
+    id: 2,
+    client: "Devon Lane",
+    title: "Portfolio Website",
+    budget: "R1,200",
+    status: "Pending",
+  },
 ];
 
 const projects = [
-  { id: 1, title: "Landing Page Design", client: "Robert Fox", budget: "R3,000", progress: 100, deadline: "Oct 25", status: "Completed" },
-  { id: 2, title: "Mobile App UI", client: "Cody Fisher", budget: "R6,200", progress: 75, deadline: "Nov 2", status: "In Progress" },
-  { id: 3, title: "E-commerce Store", client: "Jerome Bell", budget: "R8,100", progress: 50, deadline: "Nov 15", status: "In Progress" },
-  { id: 4, title: "Branding Kit", client: "Theresa Webb", budget: "R2,400", progress: 25, deadline: "Nov 30", status: "Pending" },
+  {
+    id: 1,
+    title: "Landing Page Design",
+    client: "Robert Fox",
+    budget: "R3,000",
+    progress: 100,
+    deadline: "Oct 25",
+    status: "Completed",
+  },
+  {
+    id: 2,
+    title: "Mobile App UI",
+    client: "Cody Fisher",
+    budget: "R6,200",
+    progress: 75,
+    deadline: "Nov 2",
+    status: "In Progress",
+  },
+  {
+    id: 3,
+    title: "E-commerce Store",
+    client: "Jerome Bell",
+    budget: "R8,100",
+    progress: 50,
+    deadline: "Nov 15",
+    status: "In Progress",
+  },
+  {
+    id: 4,
+    title: "Branding Kit",
+    client: "Theresa Webb",
+    budget: "R2,400",
+    progress: 25,
+    deadline: "Nov 30",
+    status: "Pending",
+  },
 ];
 
 const fadeIn = {
@@ -81,9 +148,18 @@ const FreelancerDashboard = () => {
         <main className="p-6">
           <div className="mx-auto max-w-7xl space-y-6">
             {/* Header */}
-            <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <h1 className="text-2xl font-bold text-foreground">Freelancer Dashboard</h1>
-              <p className="text-muted-foreground">Overview of your performance and earnings</p>
+            <motion.div
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <h1 className="text-2xl font-bold text-foreground">
+                Freelancer Dashboard
+              </h1>
+              <p className="text-muted-foreground">
+                Overview of your performance and earnings
+              </p>
             </motion.div>
 
             {/* Top Stats */}
@@ -95,18 +171,45 @@ const FreelancerDashboard = () => {
               viewport={{ once: true }}
             >
               {[
-                { title: "Total Earnings", value: "R12,546", change: "+18% this month", icon: DollarSign, color: "text-indigo-500" },
-                { title: "Active Clients", value: "15", change: "+3 new this week", icon: Users, color: "text-green-600" },
-                { title: "Ongoing Projects", value: "6", change: "2 deadlines this week", icon: Briefcase, color: "text-yellow-600" },
-                { title: "Average Rating", value: "4.8 ★", change: "From 36 reviews", icon: Star, color: "text-yellow-500" },
+                {
+                  title: "Total Earnings",
+                  value: "R12,546",
+                  change: "+18% this month",
+                  icon: DollarSign,
+                  color: "text-indigo-500",
+                },
+                {
+                  title: "Active Clients",
+                  value: "15",
+                  change: "+3 new this week",
+                  icon: Users,
+                  color: "text-green-600",
+                },
+                {
+                  title: "Ongoing Projects",
+                  value: "6",
+                  change: "2 deadlines this week",
+                  icon: Briefcase,
+                  color: "text-yellow-600",
+                },
+                {
+                  title: "Average Rating",
+                  value: "4.8 ★",
+                  change: "From 36 reviews",
+                  icon: Star,
+                  color: "text-yellow-500",
+                },
               ].map((stat, i) => (
                 <Card key={i} className="hover:shadow-lg transition">
                   <CardContent className="p-4 flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">{stat.title}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {stat.title}
+                      </p>
                       <h2 className="text-2xl font-bold mt-1">{stat.value}</h2>
                       <p className="text-xs text-green-500 flex items-center gap-1 mt-1">
-                        {i === 0 && <ArrowUpRight className="w-3 h-3" />} {stat.change}
+                        {i === 0 && <ArrowUpRight className="w-3 h-3" />}{" "}
+                        {stat.change}
                       </p>
                     </div>
                     <div className="rounded-lg bg-muted/40 p-3">
@@ -133,9 +236,23 @@ const FreelancerDashboard = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={growthData}>
                       <defs>
-                        <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+                        <linearGradient
+                          id="colorEarnings"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#6366F1"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#6366F1"
+                            stopOpacity={0}
+                          />
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" />
@@ -154,63 +271,32 @@ const FreelancerDashboard = () => {
               </Card>
 
               {/* Analytics Overview */}
-             <Card className="border-border/60 shadow-sm">
-  <CardHeader>
-    <CardTitle>Analytics Overview</CardTitle>
-  </CardHeader>
-
-  <CardContent className="space-y-6">
-    {/* === Circular Indicators Row === */}
-    <div className="flex justify-around items-center">
-      {[
-        { label: "Job Success", value: 95, color: "#4F46E5", trail: "#E0E7FF" },
-        { label: "Review Score", value: 88, color: "#10B981", trail: "#D1FAE5" },
-        { label: "Response Rate", value: 76, color: "#F59E0B", trail: "#FEF3C7" },
-      ].map((item) => (
-        <div key={item.label} className="flex flex-col items-center">
-          <div className="w-16">
-            <CircularProgressbar
-              value={item.value}
-              text={`${item.value}%`}
-              styles={buildStyles({
-                textColor: item.color,
-                pathColor: item.color,
-                trailColor: item.trail,
-              })}
-            />
-          </div>
-          <p className="text-xs mt-2 text-muted-foreground">{item.label}</p>
-        </div>
-      ))}
-    </div>
-
-    {/* === Mini Line/Area Chart === */}
-    <div className="h-40 w-full">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={growthData}>
-          <defs>
-            <linearGradient id="colorEarningsMini" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="month" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="earnings"
-            stroke="#6366F1"
-            strokeWidth={2}
-            fill="url(#colorEarningsMini)"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
-  </CardContent>
-</Card>
-
+              <Card className="border-border/60 shadow-sm">
+                <CardHeader>
+                  <CardTitle>Analytics Overview</CardTitle>
+                </CardHeader>
+                <CardContent className="flex justify-between">
+                  {[
+                    { label: "Job Success", value: 95, color: "#4F46E5", trail: "#E0E7FF" },
+                    { label: "Review Score", value: 88, color: "#10B981", trail: "#D1FAE5" },
+                    { label: "Response Rate", value: 76, color: "#F59E0B", trail: "#FEF3C7" },
+                  ].map((item) => (
+                    <div key={item.label} className="flex flex-col items-center">
+                      <CircularProgressbar
+                        value={item.value}
+                        text={`${item.value}%`}
+                        styles={buildStyles({
+                          textColor: item.color,
+                          pathColor: item.color,
+                          trailColor: item.trail,
+                        })}
+                        className="w-16"
+                      />
+                      <p className="text-xs mt-2 text-muted-foreground">{item.label}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* Countries + Requests + Activities */}
@@ -266,7 +352,10 @@ const FreelancerDashboard = () => {
                           {req.client} • {req.budget}
                         </p>
                       </div>
-                      <Badge variant="secondary" className="text-yellow-600 bg-yellow-50">
+                      <Badge
+                        variant="secondary"
+                        className="text-yellow-600 bg-yellow-50"
+                      >
                         {req.status}
                       </Badge>
                     </div>
@@ -285,13 +374,19 @@ const FreelancerDashboard = () => {
                       <div key={act.id} className="relative flex gap-3">
                         <span className="absolute -left-[9px] top-1 w-3 h-3 rounded-full bg-primary ring-2 ring-background" />
                         <div className="flex-shrink-0 mt-0.5">
-                          <div className={`p-1.5 rounded-full bg-muted/50 ${act.color}`}>
+                          <div
+                            className={`p-1.5 rounded-full bg-muted/50 ${act.color}`}
+                          >
                             <act.icon className="w-4 h-4 text-primary-foreground" />
                           </div>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-foreground">{act.text}</p>
-                          <p className="text-xs text-muted-foreground">{act.time}</p>
+                          <p className="text-sm font-medium text-foreground">
+                            {act.text}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {act.time}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -301,7 +396,12 @@ const FreelancerDashboard = () => {
             </motion.div>
 
             {/* Projects Table */}
-            <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <motion.div
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
               <Card className="border-border/60 shadow-sm">
                 <CardHeader>
                   <CardTitle>Projects Overview</CardTitle>
@@ -321,13 +421,14 @@ const FreelancerDashboard = () => {
                     </thead>
                     <tbody>
                       {projects.map((p) => (
-                        <tr key={p.id} className="border-b hover:bg-muted/40 transition">
+                        <tr
+                          key={p.id}
+                          className="border-b hover:bg-muted/40 transition"
+                        >
                           <td className="py-2 font-medium">{p.title}</td>
                           <td className="py-2">{p.client}</td>
                           <td className="py-2">{p.budget}</td>
-                          <td className="py-2 w-24">
-                           
-                          </td>
+                          <td className="py-2 w-24"></td>
                           <td className="py-2">{p.deadline}</td>
                           <td className="py-2">
                             <Badge

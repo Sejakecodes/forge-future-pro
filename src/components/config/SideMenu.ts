@@ -11,6 +11,9 @@ import {
   Award,
   Badge,
   FileBadge,
+  BadgeDollarSign,
+  Drill,
+  FileDiff
 } from "lucide-react";
 
 export const sidebarMenu = [
@@ -39,17 +42,17 @@ export const sidebarMenu = [
       { label: "Badges", icon: Badge, path: "/badges" },
       { label: "Awards", icon: Award, path: "/" },
       { label: "skills", icon: FileBadge, path: "/" },
-      { label: "skills", icon: Star, path: "/" },
+    
     ],
   },
    {
     label: "Resources",
      defaultOpen: true,
     items: [
-      { label: "Freelancing Toolkit", icon: FolderOpen, path: "/Resource" },
-      { label: "Pricing Guides", icon: Wallet, path: "/" },
-      { label: "Pitching strategies", icon: Star, path: "/" },
-      { label: "skills", icon: Star, path: "/" },
+      { label: "Freelancing Toolkit", icon: Drill, path: "/Resources" },
+      { label: "Pricing Guides", icon: BadgeDollarSign, path: "/" },
+      { label: "Pitching strategies", icon: FileDiff, path: "/" },
+    
     ],
   },
   {

@@ -64,7 +64,7 @@ const JobApplications = () => {
     <div className="flex min-h-screen bg-gradient-subtle">
       <AppSidebar />
       <div className="ml-64 flex-1">
-        <TopBar userName="Alex" />
+        <TopBar userName="Kitso Sejake" />
         <main className="p-6">
           <div className="mx-auto max-w-7xl space-y-6">
             {/* Job Header */}

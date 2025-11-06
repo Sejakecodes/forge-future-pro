@@ -87,7 +87,7 @@ const Wallet = () => {
       <AppSidebar />
       
       <div className="ml-64 flex-1">
-        <TopBar userName="Alex" />
+        <TopBar userName="Kitso Sejake" />
         
         <main className="p-6">
           <div className="mx-auto max-w-7xl space-y-6">

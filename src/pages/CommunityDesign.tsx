@@ -5,6 +5,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { TopBar } from "@/components/layout/TopBar";
 
 import {
   Select,
@@ -95,9 +96,12 @@ export default function CommunityDesigns() {
       animate="show"
     >
       {/* HEADER CONTROLS */}
+      <div className="sticky top-0 z-50">
+              <TopBar  />
+            </div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h2 className="text-2xl font-semibold tracking-tight">
-          Design Community
+        
         </h2>
 
         <div className="flex flex-wrap items-center gap-3">

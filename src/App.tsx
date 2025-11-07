@@ -20,7 +20,9 @@ import NotFound from "./pages/NotFound";
 import MentorsDashboard from "./pages/MentorDashboard";
 import ClientsDashboard from "./pages/ClientDashboard";
 import JobDetails from "./pages/JobDetails";
-import CommunityDesign from "./pages/communityDesign";
+import CommunityDesign from "./pages/CommunityDesign";
+import Resources from "./pages/EntreprenuelResources";
+import Feed from "./pages/Feed";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
           <Route path="/client" element={<ClientsDashboard />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/Community" element={<CommunityDesign />} />
+          <Route path="/Resources" element={<Resources />} />
+          <Route path="/Feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

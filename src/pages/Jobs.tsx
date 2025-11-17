@@ -177,7 +177,7 @@ const Jobs = () => {
                      <Button
                       size="sm"
                       variant="default"
-                      className="bg-gradient-primary"
+                      className="bg-gradient-primary bg-primary"
                       onClick={() => handleApply(job)}
                     >
                       Apply Now

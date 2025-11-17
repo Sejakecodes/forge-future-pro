@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, MessageCircle,Home,User,Briefcase } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Heart, MessageCircle,Home,User,Briefcase, Sparkles, } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
 
 
@@ -234,21 +234,51 @@ const CreativeFeed: React.FC = () => {
       
       {/* sticky topbar */}
       <div className="sticky top-0 z-50">
-        <TopBar userName="Kitso Sejake" />
-          <nav className="flex items-center gap-8 px-10 py-2 border-t border-border bg-background/90 text-sm font-medium">
-          <Link to="/feed" className="flex items-center gap-1 hover:text-primary">
-            <Home className="h-4 w-4" /> Feed
-          </Link>
-          <Link to="/jobs" className="flex items-center gap-1 hover:text-primary">
-            <Briefcase className="h-4 w-4" /> Jobs
-          </Link>
-          <Link to="/messages" className="flex items-center gap-1 hover:text-primary">
-            <MessageCircle className="h-4 w-4" /> Messages
-          </Link>
-          <Link to="/profile" className="flex items-center gap-1 hover:text-primary">
-            <User className="h-4 w-4" /> Profile
-          </Link>
-        </nav>
+         <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-border/40">
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-7 w-7 text-foreground" />
+            <span className="font-bold text-2xl">TalentHub</span>
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-sm">
+            <Link
+    to="/dashboard"
+    className="text-muted-foreground hover:text-foreground transition-colors"
+  >
+    Dashboard
+  </Link>
+
+  <Link
+    to="/messages"
+    className="text-muted-foreground hover:text-foreground transition-colors"
+  >
+    Messages
+  </Link>
+
+  <Link
+    to="/jobs"
+    className="text-muted-foreground hover:text-foreground transition-colors"
+  >
+    Jobs
+  </Link>
+
+  <Link
+    to="/community"
+    className="text-muted-foreground hover:text-foreground transition-colors"
+  >
+    Community
+  </Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link to="/auth">
+              <Avatar className="h-9 w-9 cursor-pointer">
+                        <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" />
+                        <AvatarFallback>AL</AvatarFallback>
+                      </Avatar>
+            </Link>
+          </div>
+        </div>
+      </nav>
       </div>
 
       <div className="flex flex-1 px-4 md:px-10 gap-6 pt-6">

@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, MessageCircle } from "lucide-react";
+import { Heart, MessageCircle,Home,User,Briefcase } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
+
 
 /**
  * CreativeFeed.tsx
@@ -234,6 +235,20 @@ const CreativeFeed: React.FC = () => {
       {/* sticky topbar */}
       <div className="sticky top-0 z-50">
         <TopBar userName="Kitso Sejake" />
+          <nav className="flex items-center gap-8 px-10 py-2 border-t border-border bg-background/90 text-sm font-medium">
+          <Link to="/feed" className="flex items-center gap-1 hover:text-primary">
+            <Home className="h-4 w-4" /> Feed
+          </Link>
+          <Link to="/jobs" className="flex items-center gap-1 hover:text-primary">
+            <Briefcase className="h-4 w-4" /> Jobs
+          </Link>
+          <Link to="/messages" className="flex items-center gap-1 hover:text-primary">
+            <MessageCircle className="h-4 w-4" /> Messages
+          </Link>
+          <Link to="/profile" className="flex items-center gap-1 hover:text-primary">
+            <User className="h-4 w-4" /> Profile
+          </Link>
+        </nav>
       </div>
 
       <div className="flex flex-1 px-4 md:px-10 gap-6 pt-6">

@@ -3,6 +3,7 @@ import { TopBar } from "@/components/layout/TopBar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,9 +20,45 @@ import {
   Search,
   SlidersHorizontal,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+
 
 const Jobs = () => {
   const navigate = useNavigate();
+
+  const [applyOpen, setApplyOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<any>(null);
+
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [portfolioFile, setPortfolioFile] = useState<File | null>(null);
+  const [coverLetter, setCoverLetter] = useState("");
+
+  const handleApply = (job: any) => {
+    setSelectedJob(job);
+    setApplyOpen(true);
+  };
+
+  const handleSubmitApplication = () => {
+    console.log("Submitting application for:", selectedJob);
+    console.log("CV:", cvFile);
+    console.log("Portfolio:", portfolioFile);
+    console.log("Cover Letter:", coverLetter);
+
+    setApplyOpen(false);
+    setCvFile(null);
+    setPortfolioFile(null);
+    setCoverLetter("");
+  };
+
+
 
   const jobs = [
     {
@@ -137,10 +174,11 @@ const Jobs = () => {
                     >
                       View Details
                     </Button>
-                    <Button
+                     <Button
                       size="sm"
                       variant="default"
-                      className="bg-gradient-primary "
+                      className="bg-gradient-primary"
+                      onClick={() => handleApply(job)}
                     >
                       Apply Now
                     </Button>
@@ -151,6 +189,79 @@ const Jobs = () => {
           </div>
         </main>
       </div>
+      
+      {/* APPLY MODAL */}
+      <Dialog open={applyOpen} onOpenChange={setApplyOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>
+              Apply for:{" "}
+              <span className="text-primary">
+                {selectedJob?.title}
+              </span>
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* User Info */}
+          <div className="space-y-4">
+            <div>
+              <Label>Your Name</Label>
+              <Input value="Kitso Sejake" disabled />
+            </div>
+
+            <div>
+              <Label>Your Email</Label>
+              <Input value="sejakekitso@gmail.com" disabled />
+            </div>
+
+            {/* CV Upload */}
+            <div>
+              <Label>Upload CV *</Label>
+              <Input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+              />
+            </div>
+
+            {/* Portfolio Upload */}
+            <div>
+              <Label>Upload Portfolio (optional)</Label>
+              <Input
+                type="file"
+                accept=".pdf,.zip,.png,.jpg"
+                onChange={(e) => setPortfolioFile(e.target.files?.[0] || null)}
+              />
+            </div>
+
+            {/* Cover Letter */}
+            <div>
+              <Label>Cover Letter</Label>
+              <Textarea
+                placeholder="Write a short cover letter..."
+                value={coverLetter}
+                onChange={(e) => setCoverLetter(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setApplyOpen(false)}
+            >
+              Cancel
+            </Button>
+
+            <Button
+              className="bg-gradient-primary"
+              onClick={handleSubmitApplication}
+            >
+              Submit Application
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

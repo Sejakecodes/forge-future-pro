@@ -20,29 +20,39 @@ import {
 
 const Profile = () => {
   const skills = [
-    "React", "TypeScript", "Node.js", "UI/UX Design",
-    "Figma", "Tailwind CSS", "MongoDB", "REST APIs"
+    "React",
+    "TypeScript",
+    "Node.js",
+    "UI/UX Design",
+    "Figma",
+    "Tailwind CSS",
+    "MongoDB",
+    "REST APIs",
   ];
 
   const portfolio = [
     {
       title: "E-commerce Platform",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&auto=format&fit=crop",
       category: "Web Development",
     },
     {
       title: "Mobile Banking App",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop",
       category: "Mobile Design",
     },
     {
       title: "Brand Identity",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop",
       category: "Branding",
     },
     {
       title: "Dashboard Analytics",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
       category: "UI Design",
     },
   ];
@@ -77,10 +87,10 @@ const Profile = () => {
   return (
     <div className="flex min-h-screen bg-gradient-subtle">
       <AppSidebar />
-      
+
       <div className="ml-64 flex-1">
-        <TopBar userName="Alex" />
-        
+        <TopBar userName="Kitso Sejake" />
+
         <main className="p-6">
           <div className="mx-auto max-w-7xl space-y-6">
             {/* Profile Header */}
@@ -88,14 +98,18 @@ const Profile = () => {
               <CardContent className="p-6">
                 <div className="flex items-start gap-6">
                   <Avatar className="h-24 w-24">
-                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" />
+                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kitso Sejake" />
                     <AvatarFallback>AL</AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h1 className="text-2xl font-bold text-foreground">Alex Rivera</h1>
-                        <p className="text-muted-foreground">Full-Stack Developer & UI/UX Designer</p>
+                        <h1 className="text-2xl font-bold text-foreground">
+                          Kitso Sejake
+                        </h1>
+                        <p className="text-muted-foreground">
+                          Full-Stack Developer & UI/UX Designer
+                        </p>
                         <div className="mt-2 flex items-center gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
                             <MapPin className="h-4 w-4" />
@@ -125,19 +139,29 @@ const Profile = () => {
                           <Star className="h-4 w-4 fill-current" />
                           <span className="text-xl font-bold">4.9</span>
                         </div>
-                        <p className="mt-1 text-xs text-muted-foreground">Rating (142 reviews)</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Rating (142 reviews)
+                        </p>
                       </div>
                       <div className="rounded-lg border border-border p-3">
                         <p className="text-xl font-bold text-foreground">156</p>
-                        <p className="mt-1 text-xs text-muted-foreground">Completed Projects</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Completed Projects
+                        </p>
                       </div>
                       <div className="rounded-lg border border-border p-3">
                         <p className="text-xl font-bold text-foreground">96%</p>
-                        <p className="mt-1 text-xs text-muted-foreground">Success Rate</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Success Rate
+                        </p>
                       </div>
                       <div className="rounded-lg border border-border p-3">
-                        <p className="text-xl font-bold text-foreground">$45K</p>
-                        <p className="mt-1 text-xs text-muted-foreground">Total Earned</p>
+                        <p className="text-xl font-bold text-foreground">
+                          $45K
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Total Earned
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -155,10 +179,16 @@ const Profile = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
-                      Passionate full-stack developer and UI/UX designer with 5+ years of experience creating beautiful, functional web and mobile applications. Specialized in React, Node.js, and modern design principles. I love turning complex problems into simple, elegant solutions.
+                      Passionate full-stack developer and UI/UX designer with 5+
+                      years of experience creating beautiful, functional web and
+                      mobile applications. Specialized in React, Node.js, and
+                      modern design principles. I love turning complex problems
+                      into simple, elegant solutions.
                     </p>
                     <div>
-                      <h3 className="mb-3 font-semibold text-foreground">Skills</h3>
+                      <h3 className="mb-3 font-semibold text-foreground">
+                        Skills
+                      </h3>
                       <div className="flex flex-wrap gap-2">
                         {skills.map((skill) => (
                           <Badge key={skill} variant="secondary">
@@ -190,7 +220,9 @@ const Profile = () => {
                           <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
                             <div className="text-white">
                               <p className="font-semibold">{item.title}</p>
-                              <p className="text-sm text-white/80">{item.category}</p>
+                              <p className="text-sm text-white/80">
+                                {item.category}
+                              </p>
                             </div>
                             <Button
                               size="icon"
@@ -213,7 +245,10 @@ const Profile = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {reviews.map((review, index) => (
-                      <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                      <div
+                        key={index}
+                        className="border-b border-border pb-4 last:border-0 last:pb-0"
+                      >
                         <div className="flex items-start gap-3">
                           <Avatar className="h-10 w-10">
                             <AvatarImage src={review.avatar} />
@@ -222,17 +257,30 @@ const Profile = () => {
                           <div className="flex-1">
                             <div className="flex items-start justify-between">
                               <div>
-                                <p className="font-medium text-foreground">{review.client}</p>
-                                <p className="text-sm text-muted-foreground">{review.project}</p>
+                                <p className="font-medium text-foreground">
+                                  {review.client}
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                  {review.project}
+                                </p>
                               </div>
                               <div className="flex items-center gap-1">
-                                {Array.from({ length: review.rating }).map((_, i) => (
-                                  <Star key={i} className="h-3.5 w-3.5 fill-warning text-warning" />
-                                ))}
+                                {Array.from({ length: review.rating }).map(
+                                  (_, i) => (
+                                    <Star
+                                      key={i}
+                                      className="h-3.5 w-3.5 fill-warning text-warning"
+                                    />
+                                  )
+                                )}
                               </div>
                             </div>
-                            <p className="mt-2 text-sm text-muted-foreground">{review.comment}</p>
-                            <p className="mt-1 text-xs text-muted-foreground">{review.date}</p>
+                            <p className="mt-2 text-sm text-muted-foreground">
+                              {review.comment}
+                            </p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                              {review.date}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -246,20 +294,28 @@ const Profile = () => {
                 {/* Contact Info */}
                 <Card className="border-border/60 shadow-soft">
                   <CardHeader>
-                    <CardTitle className="text-base">Contact Information</CardTitle>
+                    <CardTitle className="text-base">
+                      Contact Information
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex items-center gap-3 text-sm">
                       <Mail className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">alex@workhub.com</span>
+                      <span className="text-muted-foreground">
+                        Kitso Sejake@workhub.com
+                      </span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
                       <Phone className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">+1 (555) 123-4567</span>
+                      <span className="text-muted-foreground">
+                        +1 (555) 123-4567
+                      </span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
                       <Globe className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">alexrivera.dev</span>
+                      <span className="text-muted-foreground">
+                        Kitso Sejakerivera.dev
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -276,7 +332,9 @@ const Profile = () => {
                       </div>
                       <div>
                         <p className="text-sm font-medium">Top Rated</p>
-                        <p className="text-xs text-muted-foreground">Earned 2024-02</p>
+                        <p className="text-xs text-muted-foreground">
+                          Earned 2024-02
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-lg border border-border p-3">
@@ -285,7 +343,9 @@ const Profile = () => {
                       </div>
                       <div>
                         <p className="text-sm font-medium">Rising Talent</p>
-                        <p className="text-xs text-muted-foreground">Earned 2024-01</p>
+                        <p className="text-xs text-muted-foreground">
+                          Earned 2024-01
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -299,21 +359,27 @@ const Profile = () => {
                   <CardContent className="space-y-4">
                     <div>
                       <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Response Time</span>
+                        <span className="text-muted-foreground">
+                          Response Time
+                        </span>
                         <span className="font-medium">&lt; 1 hour</span>
                       </div>
                       <Progress value={95} className="h-2" />
                     </div>
                     <div>
                       <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">On-Time Delivery</span>
+                        <span className="text-muted-foreground">
+                          On-Time Delivery
+                        </span>
                         <span className="font-medium">98%</span>
                       </div>
                       <Progress value={98} className="h-2" />
                     </div>
                     <div>
                       <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Client Satisfaction</span>
+                        <span className="text-muted-foreground">
+                          Client Satisfaction
+                        </span>
                         <span className="font-medium">96%</span>
                       </div>
                       <Progress value={96} className="h-2" />

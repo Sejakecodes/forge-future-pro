@@ -158,7 +158,7 @@ const ClientDashboard: React.FC = () => {
     <div className="flex min-h-screen bg-gradient-subtle">
       <AppSidebar />
       <div className="ml-64 flex-1">
-        <TopBar userName="Alex Mentee" />
+        <TopBar userName="Kitso Sejake Mentee" />
         <main className="p-6">
           <div className="mx-auto max-w-7xl space-y-6">
             {/* Header */}

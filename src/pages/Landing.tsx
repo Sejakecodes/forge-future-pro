@@ -1,8 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Briefcase, Award, TrendingUp, Users, Shield, Sparkles, Star, ChevronDown } from "lucide-react";
+import {
+  ArrowRight,
+  Briefcase,
+  Award,
+  TrendingUp,
+  Users,
+  Shield,
+  Sparkles,
+  Star,
+  ChevronDown,
+} from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import {
   Accordion,
@@ -12,8 +29,20 @@ import {
 } from "@/components/ui/accordion";
 import CubeCluster from "@/components/ui/CubeCluster";
 const Landing = () => {
-  const [expandedStat, setExpandedStat] = useState<string | undefined>("projects");
-
+  const [expandedStat, setExpandedStat] = useState<string | undefined>(
+    "projects"
+  );
+  const brands = [
+    { name: "Upwork", logo: "https://cdn.simpleicons.org/upwork/000000" },
+    { name: "Fiverr", logo: "https://cdn.simpleicons.org/fiverr/000000" },
+    { name: "Toptal", logo: "https://cdn.simpleicons.org/toptal/000000" },
+    {
+      name: "Freelancer",
+      logo: "https://cdn.simpleicons.org/freelancer/000000",
+    },
+    { name: "Behance", logo: "https://cdn.simpleicons.org/behance/000000" },
+    { name: "Dribbble", logo: "https://cdn.simpleicons.org/dribbble/000000" },
+  ];
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50/30 via-white to-purple-50/20">
       {/* Navigation */}
@@ -24,15 +53,42 @@ const Landing = () => {
             <span className="font-bold text-2xl">TalentHub</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm">
-            <a href="#home" className="text-muted-foreground hover:text-foreground transition-colors">Home</a>
-            <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
-            <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
-            <a href="#work" className="text-muted-foreground hover:text-foreground transition-colors">Portfolio</a>
-            <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Reviews</a>
+            <a
+              href="#home"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Home
+            </a>
+            <a
+              href="#about"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              About
+            </a>
+            <a
+              href="#services"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Services
+            </a>
+            <a
+              href="#work"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Portfolio
+            </a>
+            <a
+              href="#testimonials"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Reviews
+            </a>
           </div>
           <div className="flex items-center gap-4">
             <Link to="/auth">
-              <Button variant="outline" className="rounded-full border-2">Let's Talk</Button>
+              <Button variant="outline" className="rounded-full border-2">
+                Let's Talk
+              </Button>
             </Link>
           </div>
         </div>
@@ -48,17 +104,21 @@ const Landing = () => {
               </Badge>
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight">
                 <span className="block">Careers That</span>
-                <span className="block">Spark{" "}</span>
+                <span className="block">Spark </span>
                 <span className="text-muted-foreground/60">Success</span>{" "}
                 <span className="block">and Growth</span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                From talented freelancers to ambitious projects, we connect professionals with opportunities. 
-                Let's build something extraordinary—together.
+                From talented freelancers to ambitious projects, we connect
+                professionals with opportunities. Let's build something
+                extraordinary—together.
               </p>
               <div className="flex items-center gap-6">
                 <Link to="/auth">
-                  <Button size="lg" className="rounded-full px-8 h-14 text-base bg-foreground text-background hover:bg-foreground/90">
+                  <Button
+                    size="lg"
+                    className="rounded-full px-8 h-14 text-base bg-foreground text-background hover:bg-foreground/90"
+                  >
                     Let's Work Together?
                   </Button>
                 </Link>
@@ -79,11 +139,12 @@ const Landing = () => {
             {/* Floating Services Sphere */}
             <div className="relative h-[600px] hidden lg:block">
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-100/50 to-purple-200/30 animate-pulse" 
-                     style={{ animationDuration: '3s' }}>
+                <div
+                  className="relative w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-100/50 to-purple-200/30 animate-pulse"
+                  style={{ animationDuration: "3s" }}
+                >
                   {/* Floating badges */}
-                   <CubeCluster />
-                 
+                  <CubeCluster />
                 </div>
               </div>
             </div>
@@ -92,23 +153,42 @@ const Landing = () => {
       </section>
 
       {/* Trusted Partners */}
-      <section className="py-12 bg-white/50">
+      <section className="py-12 bg-white/50 overflow-hidden">
         <div className="container mx-auto px-6">
           <p className="text-center text-sm text-muted-foreground mb-8">
             Trusted by freelancers and clients worldwide
           </p>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-40">
-            {["Upwork", "Fiverr", "Toptal", "Freelancer", "Behance", "Dribbble"].map((brand) => (
-              <div key={brand} className="text-center font-semibold text-lg text-foreground">
-                {brand}
-              </div>
-            ))}
+
+          <div className="relative w-full overflow-hidden">
+            <motion.div
+              className="flex gap-8 items-center"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20,
+                ease: "linear",
+              }}
+            >
+              {[...brands, ...brands].map((brand, index) => (
+                <div key={index} className="flex-shrink-0 w-32 h-16">
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="w-full h-full object-contain grayscale opacity-70 hover:grayscale-0 transition duration-300"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-gradient-to-b from-white to-purple-50/20">
+      <section
+        id="about"
+        className="py-24 bg-gradient-to-b from-white to-purple-50/20"
+      >
         <div className="container mx-auto px-6">
           <div className="mb-12">
             <Badge className="bg-background text-foreground border border-border/60 hover:bg-background/80 rounded-full px-4 py-1.5 mb-4">
@@ -119,9 +199,10 @@ const Landing = () => {
                 Our Approach is Holistic and Collaborative.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Whether it's connecting freelancers with dream projects, mentoring emerging talent, 
-                or helping businesses find the perfect match, our platform is designed to empower 
-                every step of your digital career journey.
+                Whether it's connecting freelancers with dream projects,
+                mentoring emerging talent, or helping businesses find the
+                perfect match, our platform is designed to empower every step of
+                your digital career journey.
               </p>
             </div>
           </div>
@@ -137,42 +218,62 @@ const Landing = () => {
 
             {/* Stats Accordion */}
             <div className="space-y-4">
-              <Accordion type="single" collapsible value={expandedStat} onValueChange={setExpandedStat}>
-                <AccordionItem value="projects" className="border rounded-2xl px-6 bg-white shadow-soft">
+              <Accordion
+                type="single"
+                collapsible
+                value={expandedStat}
+                onValueChange={setExpandedStat}
+              >
+                <AccordionItem
+                  value="projects"
+                  className="border rounded-2xl px-6 bg-white shadow-soft"
+                >
                   <AccordionTrigger className="hover:no-underline py-6">
                     <div className="flex items-center gap-4 text-left">
                       <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
                         <Briefcase className="h-6 w-6" />
                       </div>
                       <div>
-                        <div className="text-2xl font-bold">1K+ Projects Done</div>
+                        <div className="text-2xl font-bold">
+                          1K+ Projects Done
+                        </div>
                       </div>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground pb-6">
-                    Welcome to TalentHub where success stories begin. We are more than a freelance platform; 
-                    we are your career partners connecting talent with opportunity.
+                    Welcome to TalentHub where success stories begin. We are
+                    more than a freelance platform; we are your career partners
+                    connecting talent with opportunity.
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="clients" className="border rounded-2xl px-6 bg-white shadow-soft">
+                <AccordionItem
+                  value="clients"
+                  className="border rounded-2xl px-6 bg-white shadow-soft"
+                >
                   <AccordionTrigger className="hover:no-underline py-6">
                     <div className="flex items-center gap-4 text-left">
                       <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
                         <Users className="h-6 w-6" />
                       </div>
                       <div>
-                        <div className="text-2xl font-bold">5K+ Happy Clients</div>
+                        <div className="text-2xl font-bold">
+                          5K+ Happy Clients
+                        </div>
                       </div>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground pb-6">
-                    Our community of satisfied clients continues to grow, with businesses of all sizes 
-                    finding the perfect talent match for their projects.
+                    Our community of satisfied clients continues to grow, with
+                    businesses of all sizes finding the perfect talent match for
+                    their projects.
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="countries" className="border rounded-2xl px-6 bg-white shadow-soft">
+                <AccordionItem
+                  value="countries"
+                  className="border rounded-2xl px-6 bg-white shadow-soft"
+                >
                   <AccordionTrigger className="hover:no-underline py-6">
                     <div className="flex items-center gap-4 text-left">
                       <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
@@ -184,8 +285,9 @@ const Landing = () => {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground pb-6">
-                    A truly global platform connecting talent and opportunities across continents, 
-                    breaking geographical barriers in the digital economy.
+                    A truly global platform connecting talent and opportunities
+                    across continents, breaking geographical barriers in the
+                    digital economy.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -206,9 +308,10 @@ const Landing = () => {
                 We Craft Services That Turn Talents Into Success Stories
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                We help professionals grow through strategic connections and digital opportunities. 
-                From gig marketplace to verified badges, our services are crafted to elevate your 
-                career and leave a lasting impression.
+                We help professionals grow through strategic connections and
+                digital opportunities. From gig marketplace to verified badges,
+                our services are crafted to elevate your career and leave a
+                lasting impression.
               </p>
             </div>
           </div>
@@ -218,25 +321,32 @@ const Landing = () => {
               {
                 icon: Award,
                 title: "Digital Badges",
-                description: "Earn verified credentials that showcase your skills and achievements to potential clients."
+                description:
+                  "Earn verified credentials that showcase your skills and achievements to potential clients.",
               },
               {
                 icon: Briefcase,
                 title: "Gig Marketplace",
-                description: "Browse opportunities and connect with clients looking for your unique expertise."
+                description:
+                  "Browse opportunities and connect with clients looking for your unique expertise.",
               },
               {
                 icon: Users,
                 title: "Mentorship",
-                description: "Connect with experienced professionals who can guide your career growth journey."
+                description:
+                  "Connect with experienced professionals who can guide your career growth journey.",
               },
               {
                 icon: TrendingUp,
                 title: "Analytics",
-                description: "Track your performance, income, and career trajectory with detailed insights and reports."
+                description:
+                  "Track your performance, income, and career trajectory with detailed insights and reports.",
               },
             ].map((service, index) => (
-              <Card key={index} className="border-2 hover:border-foreground/20 transition-all hover:shadow-lg bg-white rounded-3xl">
+              <Card
+                key={index}
+                className="border-2 hover:border-foreground/20 transition-all hover:shadow-lg bg-white rounded-3xl"
+              >
                 <CardHeader className="space-y-4">
                   <div className="w-20 h-20 rounded-2xl bg-foreground flex items-center justify-center">
                     <service.icon className="h-10 w-10 text-background" />
@@ -264,26 +374,49 @@ const Landing = () => {
                 Explore Our Amazing Community
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe great work comes from clear collaboration. Our platform is designed to connect 
-                and empower. Here's a glimpse into the success stories happening every day.
+                We believe great work comes from clear collaboration. Our
+                platform is designed to connect and empower. Here's a glimpse
+                into the success stories happening every day.
               </p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Web Developer Success", category: "Development", image: "gradient-to-br from-blue-400 to-purple-500" },
-              { title: "Designer Portfolio", category: "Design", image: "gradient-to-br from-purple-400 to-pink-500" },
-              { title: "Marketing Campaign", category: "Marketing", image: "gradient-to-br from-orange-400 to-red-500" },
+              {
+                title: "Web Developer Success",
+                category: "Development",
+                image: "gradient-to-br from-blue-400 to-purple-500",
+              },
+              {
+                title: "Designer Portfolio",
+                category: "Design",
+                image: "gradient-to-br from-purple-400 to-pink-500",
+              },
+              {
+                title: "Marketing Campaign",
+                category: "Marketing",
+                image: "gradient-to-br from-orange-400 to-red-500",
+              },
             ].map((project, index) => (
-              <Card key={index} className="overflow-hidden border-2 hover:border-foreground/20 transition-all hover:shadow-lg group cursor-pointer">
-                <div className={`h-64 bg-${project.image} relative overflow-hidden`}>
+              <Card
+                key={index}
+                className="overflow-hidden border-2 hover:border-foreground/20 transition-all hover:shadow-lg group cursor-pointer"
+              >
+                <div
+                  className={`h-64 bg-${project.image} relative overflow-hidden`}
+                >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40 group-hover:opacity-80 transition-opacity" />
                 </div>
                 <CardHeader>
-                  <div className="text-sm text-muted-foreground mb-2">2025 • {project.category}</div>
+                  <div className="text-sm text-muted-foreground mb-2">
+                    2025 • {project.category}
+                  </div>
                   <CardTitle className="text-xl">{project.title}</CardTitle>
-                  <Button variant="link" className="p-0 h-auto text-foreground font-semibold">
+                  <Button
+                    variant="link"
+                    className="p-0 h-auto text-foreground font-semibold"
+                  >
                     More Info <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardHeader>
@@ -305,8 +438,9 @@ const Landing = () => {
                 Praise from our community
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Our services help you build successful digital careers. Stay ahead of the curve with 
-                opportunities, mentorship, and growth tools that make a difference.
+                Our services help you build successful digital careers. Stay
+                ahead of the curve with opportunities, mentorship, and growth
+                tools that make a difference.
               </p>
             </div>
           </div>
@@ -317,37 +451,48 @@ const Landing = () => {
                 rating: 5,
                 text: "This platform has been a game-changer! I used to struggle finding quality clients, but now I'm booked months in advance with projects I love.",
                 name: "Sarah Johnson",
-                role: "UI/UX Designer"
+                role: "UI/UX Designer",
               },
               {
                 rating: 5,
                 text: "I love how easy this platform is to use. It's completely changed the way I manage my freelance career and helps me track my growth.",
                 name: "Michael Chen",
-                role: "Full Stack Developer"
+                role: "Full Stack Developer",
               },
               {
                 rating: 4,
                 text: "The mentorship program helped me level up my skills and confidence. Now I'm taking on bigger projects and earning more than ever.",
                 name: "Emma Davis",
-                role: "Content Writer"
+                role: "Content Writer",
               },
             ].map((testimonial, index) => (
-              <Card key={index} className="border-2 bg-white hover:shadow-lg transition-shadow">
+              <Card
+                key={index}
+                className="border-2 bg-white hover:shadow-lg transition-shadow"
+              >
                 <CardContent className="pt-6 space-y-4">
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-5 w-5 ${i < testimonial.rating ? "fill-foreground text-foreground" : "text-muted-foreground/30"}`}
+                        className={`h-5 w-5 ${
+                          i < testimonial.rating
+                            ? "fill-foreground text-foreground"
+                            : "text-muted-foreground/30"
+                        }`}
                       />
                     ))}
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">{testimonial.text}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {testimonial.text}
+                  </p>
                   <div className="flex items-center gap-3 pt-4 border-t">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent" />
                     <div>
                       <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {testimonial.role}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -365,10 +510,14 @@ const Landing = () => {
               Ready to Launch Your Digital Career?
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join thousands of freelancers and mentors who are building successful careers on TalentHub.
+              Join thousands of freelancers and mentors who are building
+              successful careers on TalentHub.
             </p>
             <Link to="/auth">
-              <Button size="lg" className="rounded-full px-12 h-14 text-base bg-foreground text-background hover:bg-foreground/90">
+              <Button
+                size="lg"
+                className="rounded-full px-12 h-14 text-base bg-foreground text-background hover:bg-foreground/90"
+              >
                 Get Started Today <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

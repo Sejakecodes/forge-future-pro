@@ -50,7 +50,7 @@ export const sidebarMenu = [
      defaultOpen: true,
     items: [
       { label: "Freelancing Toolkit", icon: Drill, path: "/Resources" },
-      { label: "Pricing Guides", icon: BadgeDollarSign, path: "/" },
+      { label: "Pricing Guides", icon: BadgeDollarSign, path: "/PricingGuides" },
       { label: "Pitching strategies", icon: FileDiff, path: "/" },
     
     ],

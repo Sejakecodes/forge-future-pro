@@ -287,18 +287,18 @@ const CreativeFeed: React.FC = () => {
           <Card>
             <CardHeader className="text-lg font-semibold">Freelancer Toolkit</CardHeader>
             <CardContent className="text-sm text-muted-foreground space-y-2">
-              <p>• Pricing Guide</p>
-              <p>• Contract Templates</p>
-              <p>• Pitch Examples</p>
-              <p>• Time Tools</p>
+              <p> Pricing Guide</p>
+              <p> Contract Templates</p>
+              <p> Pitch Examples</p>
+              <p> Time Tools</p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="text-lg font-semibold">Find Opportunities</CardHeader>
             <CardContent className="text-sm text-muted-foreground space-y-2">
-              <p>• Local gigs</p>
-              <p>• Remote contracts</p>
-              <p>• Collabs</p>
+              <p> Local gigs</p>
+              <p> Remote contracts</p>
+              <p>•Collabs</p>
             </CardContent>
           </Card>
         </aside>

@@ -23,6 +23,7 @@ import JobDetails from "./pages/JobDetails";
 import CommunityDesign from "./pages/CommunityDesign";
 import Resources from "./pages/EntreprenuelResources";
 import Feed from "./pages/Feed";
+import Badges from "./pages/badge";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
           <Route path="/Community" element={<CommunityDesign />} />
           <Route path="/Resources" element={<Resources />} />
           <Route path="/Feed" element={<Feed />} />
+          <Route path="/badges" element={<Badges />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -27,6 +27,7 @@ import Badges from "./pages/badge";
 import Pricing  from "./pages/Pricingguide";
 import PitchingStrategies from "./pages/PitchingStrategies";
 import PitchReader from "./pages/Pitchreader";
+import Freelancers from "./pages/Freelancers";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
           <Route path="/badges" element={<Badges />} />
           <Route path="/Pricing" element={<Pricing />} />
           <Route path="/Pitching" element={<PitchingStrategies />} />
+          <Route path="/Freelancers" element={<Freelancers />} />
           <Route path="/pitching-strategies/:id" element={<PitchReader />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

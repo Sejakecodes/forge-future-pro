@@ -2,6 +2,7 @@ import { AppSidebar } from "@/components/layout/AppSidebar";
 import { TopBar } from "@/components/layout/TopBar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   Presentation,
   Handshake,
@@ -95,9 +96,11 @@ const PitchingStrategies = () => {
                     {strategy.desc}
                   </p>
 
+                 <Link to={`/pitching-strategies/${strategy.id}`}>
                   <Button className="bg-gradient-primary w-full">
                     Learn Strategy
                   </Button>
+                </Link>
                 </CardContent>
               </Card>
             ))}

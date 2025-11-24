@@ -25,8 +25,8 @@ import Resources from "./pages/EntreprenuelResources";
 import Feed from "./pages/Feed";
 import Badges from "./pages/badge";
 import Pricing  from "./pages/Pricingguide";
-import Pitching  from "./pages/PitchingStrategies";
 import PitchingStrategies from "./pages/PitchingStrategies";
+import PitchReader from "./pages/Pitchreader";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +59,7 @@ const App = () => (
           <Route path="/badges" element={<Badges />} />
           <Route path="/Pricing" element={<Pricing />} />
           <Route path="/Pitching" element={<PitchingStrategies />} />
+          <Route path="/pitching-strategies/:id" element={<PitchReader />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

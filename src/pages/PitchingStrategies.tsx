@@ -2,6 +2,8 @@ import { AppSidebar } from "@/components/layout/AppSidebar";
 import { TopBar } from "@/components/layout/TopBar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Link } from "react-router-dom";
 import {
   Presentation,
@@ -11,6 +13,7 @@ import {
   Users,
   Cpu,
 } from "lucide-react";
+import { useState } from "react";
 
 const PitchingStrategies = () => {
   const strategies = [
@@ -58,6 +61,24 @@ const PitchingStrategies = () => {
     },
   ];
 
+  // -------------------- FILTER STATES -----------------------
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+
+  // -------------------- FILTER LOGIC ------------------------
+  const filtered = strategies.filter((s) => {
+    const matchesSearch =
+      s.title.toLowerCase().includes(search.toLowerCase()) ||
+      s.desc.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+      category === "All" || s.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  const categories = ["All", ...new Set(strategies.map((s) => s.category))];
+
   return (
     <div className="flex min-h-screen bg-gradient-subtle">
       <AppSidebar />
@@ -67,16 +88,44 @@ const PitchingStrategies = () => {
 
         <main className="p-6 space-y-8">
           {/* HEADER */}
-          <div>
+         
+
+          {/* FILTER BAR */}
+          <div className="flex flex-col md:flex-row gap-4 items-center md:items-end">
+            <div className="w-full md:w-1/1">
+              <div>
             <h1 className="text-3xl font-semibold">Pitching Strategies</h1>
             <p className="text-muted-foreground mt-1 max-w-xl">
               Learn how to structure, deliver, and optimize your pitch to win clients confidently.
             </p>
           </div>
+            </div>
 
-          {/* GRID */}
+            <div className="w-full md:w-1/3">
+              <p className="text-sm font-medium mb-1">Category</p>
+              <Select value={category} onValueChange={(v) => setCategory(v)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* GRID LIST */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {strategies.map((strategy) => (
+            {filtered.length === 0 && (
+              <p className="text-muted-foreground">No strategies found.</p>
+            )}
+
+            {filtered.map((strategy) => (
               <Card
                 key={strategy.id}
                 className="shadow-soft border-border/60 hover:shadow-medium transition-all"
@@ -96,11 +145,11 @@ const PitchingStrategies = () => {
                     {strategy.desc}
                   </p>
 
-                 <Link to={`/pitching-strategies/${strategy.id}`}>
-                  <Button className="bg-gradient-primary w-full">
-                    Learn Strategy
-                  </Button>
-                </Link>
+                  <Link to={`/pitching-strategies/${strategy.id}`}>
+                    <Button className="bg-gradient-primary w-full">
+                      Learn Strategy
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}

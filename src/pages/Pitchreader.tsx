@@ -28,6 +28,38 @@ const strategies = [
       not just the features.
     `,
   },
+  {
+    id: 2,
+    title: "Value Proposition Pitch",
+    content: `
+      A value proposition pitch focuses on the *benefits* your offer brings,
+      not just the features.
+    `,
+  },
+  {
+    id: 5,
+    title: "Value Proposition Pitch",
+    content: `
+      A value proposition pitch focuses on the *benefits* your offer brings,
+      not just the features.
+    `,
+  },
+  {
+    id: 4,
+    title: "Value Proposition Pitch",
+    content: `
+      A value proposition pitch focuses on the *benefits* your offer brings,
+      not just the features.
+    `,
+  },
+  {
+    id: 5,
+    title: "Value Proposition Pitch",
+    content: `
+      A value proposition pitch focuses on the *benefits* your offer brings,
+      not just the features.
+    `,
+  },
   // add the rest…
 ];
 

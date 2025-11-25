@@ -1,14 +1,3 @@
-// JobsDashboard.tsx
-// Full Jobs dashboard — Option A (3-column grid) with A2 Icon Cards style.
-// Uses: react, react-router-dom, recharts, shadcn/ui components, lucide-react
-//
-// Notes:
-// - Recharts required: `npm install recharts`
-// - This file expects your TopBar and AppSidebar components to exist.
-// - The example uses a local uploaded image as a header illustration:
-//   "/mnt/data/b6cb6406-13d5-46cc-b8a1-6da31a100af0.png"
-//   (developer provided path — used here as the image src)
-
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TopBar } from "@/components/layout/TopBar";
@@ -17,14 +6,19 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import {  MoreVertical, ArrowUp, ArrowDown, Compass } from "lucide-react";
 
 import {
+  BarChart,
   PieChart,
   Pie,
   Cell,
   Tooltip,
   ResponsiveContainer,
   Legend,
+  XAxis,
+  YAxis,
+  Bar
 } from "recharts";
 
 import {
@@ -229,79 +223,95 @@ const JobsDashboard: React.FC = () => {
             />
           </div>
 
-          {/* 3-column grid top section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {/* Analytics Cards (A2 Icon Cards) */}
-            <Card className="p-4">
-              <CardHeader>
-                <CardTitle>Overview</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/70 shadow-xs">
-                    <div className="p-2 rounded-md bg-blue-50">
-                      <FileText className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Jobs Applied</p>
-                      <p className="text-xl font-semibold">{totalApplied}</p>
-                    </div>
-                  </div>
+       
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+  {/* Jobs Applied */}
+  <Card className="p-2 bg-gradient-to-r from-blue-50 to-blue-100 hover:shadow-lg transition-shadow rounded-xl">
+    {/* Header */}
+    <CardHeader className="flex items-left justify-between p-0 mb-2">
+      <div className="flex items-center gap-2">
+        <div className="p-2 rounded-md bg-blue-200/50 flex items-center justify-center">
+          <FileText className="h-4 w-4 text-blue-600" />
+        </div>
+        <CardTitle className="text-sm font-medium text-blue-700 m-0">Jobs Applied</CardTitle>
+      </div>
+      <MoreVertical className="h-4 w-4 text-blue-600 cursor-pointer" />
+    </CardHeader>
 
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/70 shadow-xs">
-                    <div className="p-2 rounded-md bg-green-50">
-                      <Users className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Active Proposals</p>
-                      <p className="text-xl font-semibold">{activeProposals}</p>
-                    </div>
-                  </div>
+    {/* Body */}
+    <CardContent className="flex items-center justify-between p-0">
+      <div className="flex items-center gap-2">
+        <p className="text-2xl font-bold text-blue-800">{totalApplied}</p>
+        <div className="flex items-center gap-1 text-sm text-green-600 mt-1">
+          <ArrowUp className="h-3 w-3" />
+          <span>+12%</span>
+        </div>
+      </div>
+      <button className="p-2 rounded-full bg-blue-200/50 hover:bg-blue-300 transition">
+        <Compass className="h-4 w-4 text-blue-600" />
+      </button>
+    </CardContent>
+  </Card>
 
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/70 shadow-xs">
-                    <div className="p-2 rounded-md bg-purple-50">
-                      <CheckCircle className="h-5 w-5 text-purple-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Shortlisted</p>
-                      <p className="text-xl font-semibold">{shortlisted}</p>
-                    </div>
-                  </div>
+  {/* Active Proposals */}
+  <Card className="p-4 bg-gradient-to-r from-green-50 to-green-100 hover:shadow-lg transition-shadow rounded-xl">
+    <CardHeader className="flex items-left justify-between p-0 mb-2">
+      <div className="flex items-left gap-2">
+        <div className="p-2 rounded-md bg-green-200/50 flex items-center justify-center">
+          <Users className="h-4 w-4 text-green-600" />
+        </div>
+        <CardTitle className="text-sm font-medium text-green-700 m-0">Active Proposals</CardTitle>
+      </div>
+      <MoreVertical className="h-4 w-4 text-green-600 cursor-pointer" />
+    </CardHeader>
 
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/70 shadow-xs">
-                    <div className="p-2 rounded-md bg-orange-50">
-                      <Clock className="h-5 w-5 text-orange-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Interviews</p>
-                      <p className="text-xl font-semibold">{interviews}</p>
-                    </div>
-                  </div>
+    <CardContent className="flex items-left justify-between p-0">
+      <div className="flex items-center gap-2">
+        <p className="text-2xl font-bold text-green-800">{activeProposals}</p>
+        <div className="flex items-center gap-1 text-sm text-red-500 mt-1">
+          <ArrowDown className="h-3 w-3" />
+          <span>-5%</span>
+        </div>
+      </div>
+      <button className="p-2 rounded-full bg-green-200/50 hover:bg-green-300 transition">
+        <Compass className="h-4 w-4 text-green-600" />
+      </button>
+    </CardContent>
+  </Card>
 
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/70 shadow-xs">
-                    <div className="p-2 rounded-md bg-red-50">
-                      <XCircle className="h-5 w-5 text-red-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Declined</p>
-                      <p className="text-xl font-semibold">{declined}</p>
-                    </div>
-                  </div>
+  {/* Avg Rating */}
+  <Card className="p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 hover:shadow-lg transition-shadow rounded-xl">
+    <CardHeader className="flex items-center justify-between p-0 mb-2">
+      <div className="flex items-center gap-2">
+        <div className="p-2 rounded-md bg-yellow-200/50 flex items-center justify-center">
+          <Star className="h-4 w-4 text-yellow-600" />
+        </div>
+        <CardTitle className="text-sm font-medium text-yellow-700 m-0">Avg Rating</CardTitle>
+      </div>
+      <MoreVertical className="h-4 w-4 text-yellow-600 cursor-pointer" />
+    </CardHeader>
 
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/70 shadow-xs">
-                    <div className="p-2 rounded-md bg-yellow-50">
-                      <Star className="h-5 w-5 text-yellow-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Avg Rating</p>
-                      <p className="text-xl font-semibold">4.8</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+    <CardContent className="flex items-left justify-between p-0">
+      <div className="flex items-center gap-2">
+        <p className="text-2xl font-bold text-yellow-800">4.8</p>
+        <div className="flex items-center gap-1 text-sm text-green-600 mt-1">
+          <ArrowUp className="h-3 w-3" />
+          <span>+8%</span>
+        </div>
+      </div>
+      <button className="p-2 rounded-full bg-yellow-200/50 hover:bg-yellow-300 transition">
+        <Compass className="h-4 w-4 text-yellow-600" />
+      </button>
+    </CardContent>
+  </Card>
+</div>
 
-            {/* Pie Chart */}
+
+
+{/* Charts Section (2-column grid) */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+  {/* Industry Distribution (Bar Chart) */}
+ {/* Pie Chart */}
             <Card className="p-4">
               <CardHeader>
                 <CardTitle>Industry Distribution</CardTitle>
@@ -328,47 +338,29 @@ const JobsDashboard: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Comparison Table */}
-            <Card className="p-4">
-              <CardHeader>
-                <CardTitle>2-Month Comparison</CardTitle>
-              </CardHeader>
-
-              <CardContent>
-                <div className="mb-3 text-sm text-muted-foreground">
-                  Applications comparison between last month and this month.
-                </div>
-
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="text-left border-b">
-                      <th className="py-2">Month</th>
-                      <th className="py-2">Applications</th>
-                      <th className="py-2">Change</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">Last Month</td>
-                      <td>14</td>
-                      <td className="text-red-500">↓ -4</td>
-                    </tr>
-                    <tr className="font-medium">
-                      <td className="py-2">This Month</td>
-                      <td>{thisMonthApps}</td>
-                      <td className="text-green-500">↑ +4</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <div className="mt-4">
-                  <p className="text-xs text-muted-foreground">
-                    Tip: Focus proposals on industries with the highest conversion.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+  {/* 2-Month Comparison (Bar Chart) */}
+  <Card className="p-4">
+    <CardHeader>
+      <CardTitle>2-Month Comparison</CardTitle>
+    </CardHeader>
+    <CardContent className="h-64">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          data={[
+            { month: "Last Month", apps: lastMonthApps },
+            { month: "This Month", apps: thisMonthApps },
+          ]}
+          margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+        >
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Bar dataKey="apps" fill="#22c55e" />
+        </BarChart>
+      </ResponsiveContainer>
+    </CardContent>
+  </Card>
+</div>
 
           {/* Search & Filters (above job list) */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">

@@ -179,6 +179,7 @@ const pieOptions = {
   responsive: true,
   plugins: {
     legend: { position: "bottom" as const },
+    
     tooltip: { enabled: true },
   },
 };
@@ -387,21 +388,25 @@ const JobsDashboard: React.FC = () => {
 {/* Charts Section (2-column grid) */}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
   {/* Industry Distribution (Pie Chart) */}
-  <Card className="p-4">
-    <CardHeader>
-      <CardTitle className="text-1xl">Industry Distribution</CardTitle>
-    </CardHeader>
-    <CardContent className="h-64 flex justify-center items-center">
+ <Card className="p-2 w-full">
+  <CardHeader>
+    <CardTitle className="text-1xl">Industry Distribution</CardTitle>
+  </CardHeader>
+
+  <CardContent className="flex justify-center items-center w-full">
+    <div className="w-full max-w-full h-64 flex justify-center items-center">
       <Pie data={pieData} options={pieOptions} />
-    </CardContent>
-  </Card>
+    </div>
+  </CardContent>
+</Card>
+
 
   {/* 2-Month Weekly Comparison (Stacked Bar Chart) */}
-  <Card className="p-4">
+  <Card className="p-2">
     <CardHeader>
       <CardTitle className="text-1xl">2-Month Weekly Comparison</CardTitle>
     </CardHeader>
-    <CardContent className="h-64 flex justify-center items-center">
+    <CardContent className="h-64 flex justify-center items-center ">
       <Bar data={weeklyData} options={weeklyOptions} />
     </CardContent>
   </Card>
@@ -446,61 +451,66 @@ const JobsDashboard: React.FC = () => {
           {/* Job list grid (professional grid layout) */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredJobs.map((job) => (
-              <Card key={job.id} className="relative hover:shadow-lg transition-all rounded-xl">
-                {/* Rating / quick meta on top-right (industry tag) */}
-                <div className="absolute top-3 right-3 flex items-center gap-2 bg-white px-2 py-1 rounded-full shadow text-xs">
-                  <span className="font-medium">{job.industry}</span>
-                </div>
+              <Card
+  key={job.id}
+  className="relative hover:shadow-lg transition-all rounded-xl flex flex-col"
+>
+  {/* Industry Tag */}
+  <div className="absolute top-3 right-3 flex items-center gap-2 bg-white px-2 py-1 rounded-full shadow text-xs">
+    <span className="font-medium">{job.industry}</span>
+  </div>
 
-                <CardHeader className="pb-0">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h3
-                        className="text-lg font-semibold hover:text-primary cursor-pointer"
-                        onClick={() => navigate(`/jobs/${job.id}`)}
-                      >
-                        {job.title}
-                      </h3>
+  <CardHeader className="pb-0">
+    <div className="flex items-start justify-between gap-4">
+      <div className="flex-1">
+        <h3
+          className="text-lg font-semibold hover:text-primary cursor-pointer"
+          onClick={() => navigate(`/jobs/${job.id}`)}
+        >
+          {job.title}
+        </h3>
 
-                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                        {job.description}
-                      </p>
+        <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+          {job.description}
+        </p>
 
-                      <div className="mt-3 flex items-center gap-2 flex-wrap">
-                        {job.tags?.map((t) => (
-                          <Badge key={t} variant="secondary">
-                            {t}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
+        <div className="mt-3 flex items-center gap-2 flex-wrap">
+          {job.tags?.map((t) => (
+            <Badge key={t} variant="secondary">
+              {t}
+            </Badge>
+          ))}
+        </div>
+      </div>
 
-                    <div className="text-right py-5">
-                      <p className="text-sm text-muted-foreground">{job.duration}</p>
-                      <p className="text-lg font-semibold mt-2">{job.budget}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{job.posted}</p>
-                    </div>
-                  </div>
-                </CardHeader>
+      <div className="text-right py-5">
+        <p className="text-sm text-muted-foreground">{job.duration}</p>
+        <p className="text-lg font-semibold mt-2">{job.budget}</p>
+        <p className="text-xs text-muted-foreground mt-1">{job.posted}</p>
+      </div>
+    </div>
+  </CardHeader>
 
-                <CardFooter className="py-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <Button variant="outline" size="sm" onClick={() => navigate(`/jobs/${job.id}`)}>
-                        View
-                      </Button>
+  {/* Footer always sticks to the bottom */}
+  <CardFooter className="py-4 mt-auto">
+    <div className="flex w-full items-center justify-between">
+      <div className="flex items-center gap-4">
+        <Button variant="outline" size="sm" onClick={() => navigate(`/jobs/${job.id}`)}>
+          View
+        </Button>
 
-                      <Button size="sm" className="bg-gradient-primary" onClick={() => openApply(job)}>
-                        Apply
-                      </Button>
-                    </div>
+        <Button size="sm" className="bg-gradient-primary" onClick={() => openApply(job)}>
+          Apply
+        </Button>
+      </div>
 
-                    <div className="text-sm text-muted-foreground">
-                      <div>{job.proposals} proposals</div>
-                    </div>
-                  </div>
-                </CardFooter>
-              </Card>
+      <div className="text-sm text-muted-foreground text-right">
+        {job.proposals} proposals
+      </div>
+    </div>
+  </CardFooter>
+</Card>
+
             ))}
           </div>
         </main>

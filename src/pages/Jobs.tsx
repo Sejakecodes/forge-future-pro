@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TopBar } from "@/components/layout/TopBar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent,CardFooter} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -14,19 +14,16 @@ import {
   LinearScale,
   BarElement,
   ArcElement,
-  Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar, Pie } from 'react-chartjs-2';
+} from "chart.js";
+import { Pie, Bar } from "react-chartjs-2";
 
-// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
   ArcElement,
-  Title,
   Tooltip,
   Legend
 );
@@ -67,6 +64,7 @@ type Job = {
   tags?: string[];
 };
 
+
 const HEADER_IMAGE = "/mnt/data/b6cb6406-13d5-46cc-b8a1-6da31a100af0.png";
 
 const SAMPLE_JOBS: Job[] = [
@@ -74,7 +72,7 @@ const SAMPLE_JOBS: Job[] = [
     id: 1,
     title: "Full-Stack Developer for E-commerce Platform",
     industry: "Software",
-    budget: "$5,000 - $8,000",
+    budget: "R5,000 - R8,000",
     duration: "2-3 months",
     posted: "2 hours ago",
     description:
@@ -86,7 +84,7 @@ const SAMPLE_JOBS: Job[] = [
     id: 2,
     title: "Mobile App UI/UX Designer",
     industry: "Design",
-    budget: "$2,500 - $4,000",
+    budget: "R2,500 - R4,000",
     duration: "1 month",
     posted: "5 hours ago",
     description:
@@ -98,7 +96,7 @@ const SAMPLE_JOBS: Job[] = [
     id: 3,
     title: "WordPress Website Development",
     industry: "Software",
-    budget: "$1,500 - $2,500",
+    budget: "R1,500 - R2,500",
     duration: "2-4 weeks",
     posted: "1 day ago",
     description:
@@ -110,7 +108,7 @@ const SAMPLE_JOBS: Job[] = [
     id: 4,
     title: "Social Media Marketing Manager",
     industry: "Marketing",
-    budget: "$3,000 - $5,000",
+    budget: "R3,000 - R5,000",
     duration: "3 months",
     posted: "1 day ago",
     description:
@@ -122,7 +120,7 @@ const SAMPLE_JOBS: Job[] = [
     id: 5,
     title: "Python Data Analysis & Visualization",
     industry: "Data",
-    budget: "$1,200 - $2,000",
+    budget: "R1,200 - R2,000",
     duration: "2 weeks",
     posted: "2 days ago",
     description:
@@ -134,7 +132,7 @@ const SAMPLE_JOBS: Job[] = [
     id: 6,
     title: "Logo & Brand Identity Design",
     industry: "Design",
-    budget: "$800 - $1,500",
+    budget: "R800 - R1,500",
     duration: "1-2 weeks",
     posted: "3 days ago",
     description:
@@ -143,10 +141,73 @@ const SAMPLE_JOBS: Job[] = [
     tags: ["Branding", "Illustrator"],
   },
 ];
+const weeklyData = {
+  labels: [
+    "1",
+    "2",
+    "2",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+  ],
+  datasets: [
+    {
+      label: "Applications",
+      data: [3, 4, 5, 2, 2, 3, 5, 6], // replace with your dynamic data
+      backgroundColor: "#22c55e",
+    },
+  ],
+};
+
+const weeklyOptions = {
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+    tooltip: { enabled: true },
+  },
+  scales: {
+    y: { beginAtZero: true },
+  },
+};
+
+// Pie chart data remains the same
+
+
+const pieOptions = {
+  responsive: true,
+  plugins: {
+    legend: { position: "bottom" as const },
+    tooltip: { enabled: true },
+  },
+};
+// --- Prepare industry data for Pie chart ---
+const industryMap: Record<string, number> = {};
+SAMPLE_JOBS.forEach((job) => {
+  industryMap[job.industry] = (industryMap[job.industry] || 0) + 1;
+});
+
+const industryData = Object.keys(industryMap).map((key) => ({
+  name: key,
+  value: industryMap[key],
+}));
+
 
 const COLORS = ["#3b82f6", "#22c55e", "#f97316", "#a855f7", "#ef4444", "#06b6d4"];
-
+const pieData = {
+  labels: industryData.map((d) => d.name),
+  datasets: [
+    {
+      label: "Industry Jobs",
+      data: industryData.map((d) => d.value),
+      backgroundColor: COLORS,
+      borderWidth: 1,
+    },
+  ],
+};
 const JobsDashboard: React.FC = () => {
+  
   const navigate = useNavigate();
 
   // Application modal state
@@ -238,7 +299,7 @@ const JobsDashboard: React.FC = () => {
        
 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
   {/* Jobs Applied */}
-  <Card className="p-2 bg-gradient-to-r from-blue-50 to-blue-100 hover:shadow-lg transition-shadow rounded-xl">
+  <Card className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 hover:shadow-lg transition-shadow rounded-xl">
     {/* Header */}
     <CardHeader className="flex items-left justify-between p-0 mb-2">
       <div className="flex items-center gap-2">
@@ -247,7 +308,7 @@ const JobsDashboard: React.FC = () => {
         </div>
         <CardTitle className="text-sm font-medium text-blue-700 m-0">Jobs Applied</CardTitle>
       </div>
-      <MoreVertical className="h-4 w-4 text-blue-600 cursor-pointer" />
+    
     </CardHeader>
 
     {/* Body */}
@@ -274,7 +335,7 @@ const JobsDashboard: React.FC = () => {
         </div>
         <CardTitle className="text-sm font-medium text-green-700 m-0">Active Proposals</CardTitle>
       </div>
-      <MoreVertical className="h-4 w-4 text-green-600 cursor-pointer" />
+
     </CardHeader>
 
     <CardContent className="flex items-left justify-between p-0">
@@ -301,7 +362,7 @@ const JobsDashboard: React.FC = () => {
         <CardTitle className="text-sm font-medium text-yellow-700 m-0">Avg Rating</CardTitle>
       </div>
       <div>
-        <MoreVertical className="h-4 w-4 text-yellow-600 cursor-pointer" />
+       
       </div>
       
     </CardHeader>
@@ -325,66 +386,23 @@ const JobsDashboard: React.FC = () => {
 
 {/* Charts Section (2-column grid) */}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-  {/* Industry Distribution (Bar Chart) */}
- {/* Pie Chart */}
-            <Card className="p-4 items-center">
-              <CardHeader>
-                <CardTitle>Industry Distribution</CardTitle>
-              </CardHeader>
-              <CardContent className="h-64">
-                <Pie
-                data={{
-                  labels: industryData.map((d) => d.name),
-                  datasets: [
-                    {
-                      label: 'Industry Jobs',
-                      data: industryData.map((d) => d.value),
-                      backgroundColor: COLORS,
-                      borderWidth: 1,
-                    },
-                  ],
-                }}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    legend: { position: 'bottom' },
-                    tooltip: { enabled: true },
-                  },
-                }}
-              />
-
-              </CardContent>
-            </Card>
-
-  {/* 2-Month Comparison (Bar Chart) */}
-  <Card className="p-4 items-center ">
+  {/* Industry Distribution (Pie Chart) */}
+  <Card className="p-4">
     <CardHeader>
-      <CardTitle>2-Month Comparison</CardTitle>
+      <CardTitle className="text-1xl">Industry Distribution</CardTitle>
     </CardHeader>
-    <CardContent className="h-64 items-center">
-      <Bar
-  data={{
-    labels: ['Last Month', 'This Month'],
-    datasets: [
-      {
-        label: 'Applications',
-        data: [lastMonthApps, thisMonthApps],
-        backgroundColor: ['#3b82f6', '#22c55e'],
-      },
-    ],
-  }}
-  options={{
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      tooltip: { enabled: true },
-    },
-    scales: {
-      y: { beginAtZero: true },
-    },
-  }}
-/>
+    <CardContent className="h-64 flex justify-center items-center">
+      <Pie data={pieData} options={pieOptions} />
+    </CardContent>
+  </Card>
 
+  {/* 2-Month Weekly Comparison (Stacked Bar Chart) */}
+  <Card className="p-4">
+    <CardHeader>
+      <CardTitle className="text-1xl">2-Month Weekly Comparison</CardTitle>
+    </CardHeader>
+    <CardContent className="h-64 flex justify-center items-center">
+      <Bar data={weeklyData} options={weeklyOptions} />
     </CardContent>
   </Card>
 </div>
@@ -457,7 +475,7 @@ const JobsDashboard: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="text-right">
+                    <div className="text-right py-5">
                       <p className="text-sm text-muted-foreground">{job.duration}</p>
                       <p className="text-lg font-semibold mt-2">{job.budget}</p>
                       <p className="text-xs text-muted-foreground mt-1">{job.posted}</p>
@@ -465,7 +483,7 @@ const JobsDashboard: React.FC = () => {
                   </div>
                 </CardHeader>
 
-                <CardContent>
+                <CardFooter className="py-4">
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <Button variant="outline" size="sm" onClick={() => navigate(`/jobs/${job.id}`)}>
@@ -481,7 +499,7 @@ const JobsDashboard: React.FC = () => {
                       <div>{job.proposals} proposals</div>
                     </div>
                   </div>
-                </CardContent>
+                </CardFooter>
               </Card>
             ))}
           </div>

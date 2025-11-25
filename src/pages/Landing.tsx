@@ -1,498 +1,277 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  ArrowRight,
-  Briefcase,
-  Award,
-  TrendingUp,
-  Users,
-  Shield,
-  Sparkles,
-  Star,
-  ChevronDown,
-} from "lucide-react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { Button } from "@/components/ui/button"; import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"; import { Badge } from "@/components/ui/badge"; // assume you have an index export for shadcn pieces
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import CubeCluster from "@/components/ui/CubeCluster";
-const Landing = () => {
-  const [expandedStat, setExpandedStat] = useState<string | undefined>(
-    "projects"
-  );
-  const brands = [
-    { name: "Upwork", logo: "https://cdn.simpleicons.org/upwork/000000" },
-    { name: "Fiverr", logo: "https://cdn.simpleicons.org/fiverr/000000" },
-    { name: "Toptal", logo: "https://cdn.simpleicons.org/toptal/000000" },
-    {
-      name: "Freelancer",
-      logo: "https://cdn.simpleicons.org/freelancer/000000",
-    },
-    { name: "Behance", logo: "https://cdn.simpleicons.org/behance/000000" },
-    { name: "Dribbble", logo: "https://cdn.simpleicons.org/dribbble/000000" },
-  ];
+  ArrowRight,
+  Search,
+  MapPin,
+  Briefcase,
+  Star,
+  Users,
+  Sparkles,
+} from "lucide-react";
+
+// Local image uploaded by the user (developer instruction)
+const heroImg = "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61";
+
+const brands = [
+  { name: "Pinterest", size: "60x24" },
+  { name: "LinkedIn", size: "60x24" },
+  { name: "Behance", size: "60x24" },
+  { name: "Upwork", size: "60x24" },
+];
+
+export default function LandingFull() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50/30 via-white to-purple-50/20">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-border/40">
+    <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground">
+      {/* NAV */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border/40">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Sparkles className="h-7 w-7 text-foreground" />
-            <span className="font-bold text-2xl">TalentHub</span>
+            <span className="font-bold text-xl md:text-2xl">JobFine</span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm">
-            <a
-              href="#home"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Home
-            </a>
-            <a
-              href="#about"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#services"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Services
-            </a>
-            <a
-              href="#work"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Portfolio
-            </a>
-            <a
-              href="#testimonials"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Reviews
-            </a>
+
+          <div className="hidden lg:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#home" className="hover:text-foreground">Home</a>
+            <a href="#jobs" className="hover:text-foreground">Jobs</a>
+            <a href="#how" className="hover:text-foreground">How it works</a>
+            <a href="#testimonials" className="hover:text-foreground">Testimonials</a>
           </div>
+
           <div className="flex items-center gap-4">
             <Link to="/auth">
-              <Button variant="outline" className="rounded-full border-2">
-                Let's Talk
-              </Button>
+              <Button className="rounded-full px-6 h-11" variant="default">Sign in</Button>
+            </Link>
+            <Link to="/auth" className="hidden md:inline-block">
+              <Button className="rounded-full px-6 h-11 bg-foreground text-background">Get Started</Button>
             </Link>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="relative pt-32 pb-20 overflow-hidden">
+      {/* HERO - large two column layout like the image */}
+      <header id="home" className="pt-28 pb-10">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <Badge className="bg-background text-foreground border border-border/60 hover:bg-background/80 rounded-full px-4 py-1.5">
-                Freelance Platform
-              </Badge>
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight">
-                <span className="block">Careers That</span>
-                <span className="block">Spark </span>
-                <span className="text-muted-foreground/60">Success</span>{" "}
-                <span className="block">and Growth</span>
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            {/* Left: copy */}
+            <div className="lg:col-span-6 space-y-6">
+              <Badge className="bg-background border border-border/60 rounded-full px-4 py-1">Why choose us</Badge>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+                Many Top Companies
+                <br /> Posted Here
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                From talented freelancers to ambitious projects, we connect
-                professionals with opportunities. Let's build something
-                extraordinary—together.
+              <p className="text-lg text-muted-foreground max-w-xl">
+                Discover opportunities from leading companies across various industries. Our platform hosts job postings from top-tier organizations, giving freelancers access to high-quality projects and reputable clients.
               </p>
-              <div className="flex items-center gap-6">
-                <Link to="/auth">
-                  <Button
-                    size="lg"
-                    className="rounded-full px-8 h-14 text-base bg-foreground text-background hover:bg-foreground/90"
-                  >
-                    Let's Work Together?
-                  </Button>
+
+              <div className="flex items-center gap-4">
+                <Link to="/jobs">
+                  <Button size="lg" className="rounded-full px-8 h-14">Explore Opening Jobs</Button>
                 </Link>
-                <div className="flex items-center gap-3">
-                  <div className="flex -space-x-2">
-                    <div className="w-10 h-10 rounded-full bg-primary border-2 border-background" />
-                    <div className="w-10 h-10 rounded-full bg-accent border-2 border-background" />
-                    <div className="w-10 h-10 rounded-full bg-success border-2 border-background" />
+
+                <div className="ml-4 hidden md:flex items-center gap-3">
+                  <div className="flex -space-x-3">
+                    <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe" className="w-10 h-10 rounded-full object-cover border-2" />
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" className="w-10 h-10 rounded-full object-cover border-2" />
+                    <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39" className="w-10 h-10 rounded-full object-cover border-2" />
                   </div>
                   <div className="text-sm">
-                    <div className="font-semibold">120K+</div>
-                    <div className="text-muted-foreground">Active users</div>
+                    <div className="font-semibold">8M+</div>
+                    <div className="text-muted-foreground">Matches Made</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating search card like image */}
+              <div className="mt-8 relative w-full max-w-md">
+                <div className="absolute -top-6 right-0 w-[420px] shadow-xl rounded-2xl bg-white p-4 border">
+                  <div className="flex items-center gap-2 justify-between">
+                    <div className="flex items-center gap-3">
+                      <img src={heroImg} alt="company" className="w-10 h-10 rounded-md object-cover" />
+                      <div>
+                        <div className="font-semibold">Pinterest</div>
+                        <div className="text-sm text-muted-foreground">$50.00/hr • Remote</div>
+                      </div>
+                    </div>
+                    <Button size="sm" variant="ghost">Apply</Button>
+                  </div>
+
+                  <div className="mt-4 grid grid-cols-3 gap-3 text-sm text-muted-foreground">
+                    <div className="col-span-2">Product Designer • Remote</div>
+                    <div className="text-right">3h ago</div>
+                  </div>
+                </div>
+
+                <div className="h-20" />
+              </div>
+            </div>
+
+            {/* Right: image and cards */}
+            <div className="lg:col-span-6 relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-neutral-100 to-white">
+                <img src={heroImg} alt="hero" className="w-full h-[420px] object-cover" />
+                <div className="p-6 -mt-12">
+                  <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 border">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm text-muted-foreground">Company</div>
+                        <div className="font-semibold">Pinterest</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-muted-foreground">Salary</div>
+                        <div className="font-semibold">$50/hr</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid grid-cols-2 gap-3">
+                      <Button variant="outline" className="rounded-full">Full time</Button>
+                      <Button variant="ghost" className="rounded-full">Remote</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* small floating cards stack */}
+              <div className="absolute left-6 top-6 w-56 shadow-lg rounded-2xl bg-white p-3 border">
+                <div className="text-xs text-muted-foreground">Featured</div>
+                <div className="font-semibold">LinkedIn • UX Writer</div>
+                <div className="text-xs text-muted-foreground mt-2">$40/hr • Remote</div>
+              </div>
+
+              <div className="absolute right-6 bottom-6 w-72 shadow-lg rounded-2xl bg-white p-4 border">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm text-muted-foreground">Top Company</div>
+                    <div className="font-semibold">Behance</div>
+                  </div>
+                  <div className="text-green-600 font-semibold">Remote</div>
+                </div>
+
+                <div className="mt-3 text-sm text-muted-foreground">Design • 2d ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* How it works */}
+      <section id="how" className="py-14 bg-foreground text-background">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6">
+              <h3 className="text-3xl font-bold">Meet with Jobfine's AI Recruiter Now</h3>
+              <p className="mt-4 text-lg text-white/90 max-w-xl">Take the next step in your career by meeting with Jobfine's cutting-edge AI recruiter. It helps match your skills to jobs faster and more accurately.</p>
+              <div className="mt-6">
+                <Button className="rounded-full px-6 h-12 bg-white text-foreground">Discover More</Button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="bg-white rounded-2xl p-6 text-foreground shadow-md">
+                <div className="text-sm text-muted-foreground">Your Qualified Candidates Review List</div>
+                <div className="mt-4 grid gap-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary" />
+                      <div>
+                        <div className="font-semibold">Kay Holme</div>
+                        <div className="text-xs text-muted-foreground">Product Designer</div>
+                      </div>
+                    </div>
+                    <div className="text-sm text-muted-foreground">Interviewed</div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-accent" />
+                      <div>
+                        <div className="font-semibold">James Moran</div>
+                        <div className="text-xs text-muted-foreground">Full Stack</div>
+                      </div>
+                    </div>
+                    <div className="text-sm text-muted-foreground">Shortlisted</div>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Floating Services Sphere */}
-            <div className="relative h-[600px] hidden lg:block">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div
-                  className="relative w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-100/50 to-purple-200/30 animate-pulse"
-                  style={{ animationDuration: "3s" }}
-                >
-                  {/* Floating badges */}
-                  <CubeCluster />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Trusted Partners */}
-      <section className="py-12 bg-white/50 overflow-hidden">
+      {/* Job of the day / Marketplace */}
+      <section id="jobs" className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            Trusted by freelancers and clients worldwide
-          </p>
-
-          <div className="relative w-full overflow-hidden">
-            <motion.div
-              className="flex gap-8 items-center"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear",
-              }}
-            >
-              {[...brands, ...brands].map((brand, index) => (
-                <div key={index} className="flex-shrink-0 w-32 h-16">
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    className="w-full h-full object-contain grayscale opacity-70 hover:grayscale-0 transition duration-300"
-                  />
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section
-        id="about"
-        className="py-24 bg-gradient-to-b from-white to-purple-50/20"
-      >
-        <div className="container mx-auto px-6">
-          <div className="mb-12">
-            <Badge className="bg-background text-foreground border border-border/60 hover:bg-background/80 rounded-full px-4 py-1.5 mb-4">
-              About us 🚀
-            </Badge>
-            <div className="grid lg:grid-cols-2 gap-8">
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-                Our Approach is Holistic and Collaborative.
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Whether it's connecting freelancers with dream projects,
-                mentoring emerging talent, or helping businesses find the
-                perfect match, our platform is designed to empower every step of
-                your digital career journey.
-              </p>
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <h4 className="text-3xl font-bold">Check Job of The Day</h4>
+              <p className="text-muted-foreground">The digital marketing solution provider for Ford Dealers</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button variant="ghost">See all</Button>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Video/Image placeholder */}
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 aspect-video flex items-center justify-center group cursor-pointer">
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
-              <div className="relative z-10 w-20 h-20 rounded-full bg-white/90 flex items-center justify-center">
-                <div className="w-0 h-0 border-l-[16px] border-l-foreground border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1" />
-              </div>
-            </div>
-
-            {/* Stats Accordion */}
-            <div className="space-y-4">
-              <Accordion
-                type="single"
-                collapsible
-                value={expandedStat}
-                onValueChange={setExpandedStat}
-              >
-                <AccordionItem
-                  value="projects"
-                  className="border rounded-2xl px-6 bg-white shadow-soft"
-                >
-                  <AccordionTrigger className="hover:no-underline py-6">
-                    <div className="flex items-center gap-4 text-left">
-                      <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
-                        <Briefcase className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">
-                          1K+ Projects Done
-                        </div>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6">
-                    Welcome to TalentHub where success stories begin. We are
-                    more than a freelance platform; we are your career partners
-                    connecting talent with opportunity.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem
-                  value="clients"
-                  className="border rounded-2xl px-6 bg-white shadow-soft"
-                >
-                  <AccordionTrigger className="hover:no-underline py-6">
-                    <div className="flex items-center gap-4 text-left">
-                      <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
-                        <Users className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">
-                          5K+ Happy Clients
-                        </div>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6">
-                    Our community of satisfied clients continues to grow, with
-                    businesses of all sizes finding the perfect talent match for
-                    their projects.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem
-                  value="countries"
-                  className="border rounded-2xl px-6 bg-white shadow-soft"
-                >
-                  <AccordionTrigger className="hover:no-underline py-6">
-                    <div className="flex items-center gap-4 text-left">
-                      <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
-                        <TrendingUp className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">30+ Countries</div>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6">
-                    A truly global platform connecting talent and opportunities
-                    across continents, breaking geographical barriers in the
-                    digital economy.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="services" className="py-24 bg-purple-50/20">
-        <div className="container mx-auto px-6">
-          <div className="mb-16">
-            <Badge className="bg-background text-foreground border border-border/60 hover:bg-background/80 rounded-full px-4 py-1.5 mb-4">
-              Services 🎯
-            </Badge>
-            <div className="grid lg:grid-cols-2 gap-8">
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-                We Craft Services That Turn Talents Into Success Stories
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We help professionals grow through strategic connections and
-                digital opportunities. From gig marketplace to verified badges,
-                our services are crafted to elevate your career and leave a
-                lasting impression.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Award,
-                title: "Digital Badges",
-                description:
-                  "Earn verified credentials that showcase your skills and achievements to potential clients.",
-              },
-              {
-                icon: Briefcase,
-                title: "Gig Marketplace",
-                description:
-                  "Browse opportunities and connect with clients looking for your unique expertise.",
-              },
-              {
-                icon: Users,
-                title: "Mentorship",
-                description:
-                  "Connect with experienced professionals who can guide your career growth journey.",
-              },
-              {
-                icon: TrendingUp,
-                title: "Analytics",
-                description:
-                  "Track your performance, income, and career trajectory with detailed insights and reports.",
-              },
-            ].map((service, index) => (
-              <Card
-                key={index}
-                className="border-2 hover:border-foreground/20 transition-all hover:shadow-lg bg-white rounded-3xl"
-              >
-                <CardHeader className="space-y-4">
-                  <div className="w-20 h-20 rounded-2xl bg-foreground flex items-center justify-center">
-                    <service.icon className="h-10 w-10 text-background" />
-                  </div>
-                  <CardTitle className="text-2xl">{service.title}</CardTitle>
-                  <CardDescription className="text-base leading-relaxed">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio/Work Section */}
-      <section id="work" className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="mb-16">
-            <Badge className="bg-background text-foreground border border-border/60 hover:bg-background/80 rounded-full px-4 py-1.5 mb-4">
-              Success Stories 💼
-            </Badge>
-            <div className="grid lg:grid-cols-2 gap-8">
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-                Explore Our Amazing Community
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe great work comes from clear collaboration. Our
-                platform is designed to connect and empower. Here's a glimpse
-                into the success stories happening every day.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Web Developer Success",
-                category: "Development",
-                image: "gradient-to-br from-blue-400 to-purple-500",
-              },
-              {
-                title: "Designer Portfolio",
-                category: "Design",
-                image: "gradient-to-br from-purple-400 to-pink-500",
-              },
-              {
-                title: "Marketing Campaign",
-                category: "Marketing",
-                image: "gradient-to-br from-orange-400 to-red-500",
-              },
-            ].map((project, index) => (
-              <Card
-                key={index}
-                className="overflow-hidden border-2 hover:border-foreground/20 transition-all hover:shadow-lg group cursor-pointer"
-              >
-                <div
-                  className={`h-64 bg-${project.image} relative overflow-hidden`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40 group-hover:opacity-80 transition-opacity" />
-                </div>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Card key={i} className="p-4 rounded-2xl border">
                 <CardHeader>
-                  <div className="text-sm text-muted-foreground mb-2">
-                    2025 • {project.category}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-sm text-muted-foreground">{i}. Company</div>
+                      <div className="font-semibold">Purchasing Staff</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-muted-foreground">Remote</div>
+                      <div className="font-semibold">$24/hr</div>
+                    </div>
                   </div>
-                  <CardTitle className="text-xl">{project.title}</CardTitle>
-                  <Button
-                    variant="link"
-                    className="p-0 h-auto text-foreground font-semibold"
-                  >
-                    More Info <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
                 </CardHeader>
+                <CardContent className="pt-2">
+                  <div className="text-sm text-muted-foreground">3d ago • Full time</div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <Button variant="link">Apply <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                    <div className="text-xs text-muted-foreground">45 applicants</div>
+                  </div>
+                </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-purple-50/20">
+      {/* Testimonials */}
+      <section id="testimonials" className="py-16 bg-purple-50/20">
         <div className="container mx-auto px-6">
-          <div className="mb-16">
-            <Badge className="bg-background text-foreground border border-border/60 hover:bg-background/80 rounded-full px-4 py-1.5 mb-4">
-              Testimonials ⭐
-            </Badge>
-            <div className="grid lg:grid-cols-2 gap-8">
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-                Praise from our community
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our services help you build successful digital careers. Stay
-                ahead of the curve with opportunities, mentorship, and growth
-                tools that make a difference.
-              </p>
-            </div>
+          <div className="mb-8 text-center max-w-3xl mx-auto">
+            <Badge className="bg-background border border-border/60 rounded-full px-4 py-1">Testimony</Badge>
+            <h3 className="text-3xl font-bold mt-4">Quotes from Our Customers</h3>
+            <p className="text-muted-foreground mt-2">The digital marketing solution provider for Ford Dealers</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                rating: 5,
-                text: "This platform has been a game-changer! I used to struggle finding quality clients, but now I'm booked months in advance with projects I love.",
-                name: "Sarah Johnson",
-                role: "UI/UX Designer",
-              },
-              {
-                rating: 5,
-                text: "I love how easy this platform is to use. It's completely changed the way I manage my freelance career and helps me track my growth.",
-                name: "Michael Chen",
-                role: "Full Stack Developer",
-              },
-              {
-                rating: 4,
-                text: "The mentorship program helped me level up my skills and confidence. Now I'm taking on bigger projects and earning more than ever.",
-                name: "Emma Davis",
-                role: "Content Writer",
-              },
-            ].map((testimonial, index) => (
-              <Card
-                key={index}
-                className="border-2 bg-white hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="pt-6 space-y-4">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-5 w-5 ${
-                          i < testimonial.rating
-                            ? "fill-foreground text-foreground"
-                            : "text-muted-foreground/30"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {testimonial.text}
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t">
+          <div className="grid md:grid-cols-3 gap-6">
+            {[{
+              text: "As a freelancer, I've tried multiple platforms, but none have been as efficient as this one.",
+              name: "Robert Fox",
+              role: "Lead Marketer"
+            }, {
+              text: "Great UX and helpful recruiters — highly recommended.",
+              name: "Jane Doe",
+              role: "Product Manager"
+            }, {
+              text: "The payment process is secure and straightforward.",
+              name: "Samuel L",
+              role: "Developer"
+            }].map((t, idx) => (
+              <Card key={idx} className="p-6 rounded-2xl border">
+                <CardContent>
+                  <div className="text-lg italic">“{t.text}”</div>
+                  <div className="mt-4 flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent" />
                     <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {testimonial.role}
-                      </div>
+                      <div className="font-semibold">{t.name}</div>
+                      <div className="text-sm text-muted-foreground">{t.role}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -502,45 +281,23 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-              Ready to Launch Your Digital Career?
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join thousands of freelancers and mentors who are building
-              successful careers on TalentHub.
-            </p>
-            <Link to="/auth">
-              <Button
-                size="lg"
-                className="rounded-full px-12 h-14 text-base bg-foreground text-background hover:bg-foreground/90"
-              >
-                Get Started Today <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="py-12 border-t bg-purple-50/10">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-foreground" />
-              <span className="font-bold text-xl">TalentHub</span>
+      <footer className="py-12 border-t bg-white">
+        <div className="container mx-auto px-6 text-center">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <Sparkles className="h-6 w-6" />
+              <div className="font-bold">JobFine</div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              © 2025 TalentHub. Building successful digital careers worldwide.
-            </p>
+            <div className="text-sm text-muted-foreground">© 2025 JobFine. All rights reserved.</div>
+            <div className="flex items-center gap-2">
+              {brands.map((b) => (
+                <div key={b.name} className="text-xs text-muted-foreground">{b.name}</div>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
     </div>
   );
-};
-
-export default Landing;
+}

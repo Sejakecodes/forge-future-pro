@@ -9,17 +9,29 @@ import { Badge } from "@/components/ui/badge";
 import {  MoreVertical, ArrowUp, ArrowDown, Compass } from "lucide-react";
 
 import {
-  BarChart,
-  PieChart,
-  Pie,
-  Cell,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
   Tooltip,
-  ResponsiveContainer,
   Legend,
-  XAxis,
-  YAxis,
-  Bar
-} from "recharts";
+} from 'chart.js';
+import { Bar, Pie } from 'react-chartjs-2';
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+
 
 import {
   Users,
@@ -281,14 +293,17 @@ const JobsDashboard: React.FC = () => {
 
   {/* Avg Rating */}
   <Card className="p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 hover:shadow-lg transition-shadow rounded-xl">
-    <CardHeader className="flex items-center justify-between p-0 mb-2">
+    <CardHeader className="flex items-left justify-between p-0 mb-2">
       <div className="flex items-center gap-2">
         <div className="p-2 rounded-md bg-yellow-200/50 flex items-center justify-center">
           <Star className="h-4 w-4 text-yellow-600" />
         </div>
         <CardTitle className="text-sm font-medium text-yellow-700 m-0">Avg Rating</CardTitle>
       </div>
-      <MoreVertical className="h-4 w-4 text-yellow-600 cursor-pointer" />
+      <div>
+        <MoreVertical className="h-4 w-4 text-yellow-600 cursor-pointer" />
+      </div>
+      
     </CardHeader>
 
     <CardContent className="flex items-left justify-between p-0">
@@ -312,52 +327,64 @@ const JobsDashboard: React.FC = () => {
 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
   {/* Industry Distribution (Bar Chart) */}
  {/* Pie Chart */}
-            <Card className="p-4">
+            <Card className="p-4 items-center">
               <CardHeader>
                 <CardTitle>Industry Distribution</CardTitle>
               </CardHeader>
               <CardContent className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={industryData}
-                      dataKey="value"
-                      nameKey="name"
-                      outerRadius={85}
-                      innerRadius={35}
-                      label
-                    >
-                      {industryData.map((_, idx) => (
-                        <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
+                <Pie
+                data={{
+                  labels: industryData.map((d) => d.name),
+                  datasets: [
+                    {
+                      label: 'Industry Jobs',
+                      data: industryData.map((d) => d.value),
+                      backgroundColor: COLORS,
+                      borderWidth: 1,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { enabled: true },
+                  },
+                }}
+              />
+
               </CardContent>
             </Card>
 
   {/* 2-Month Comparison (Bar Chart) */}
-  <Card className="p-4">
+  <Card className="p-4 items-center ">
     <CardHeader>
       <CardTitle>2-Month Comparison</CardTitle>
     </CardHeader>
-    <CardContent className="h-64">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={[
-            { month: "Last Month", apps: lastMonthApps },
-            { month: "This Month", apps: thisMonthApps },
-          ]}
-          margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
-        >
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="apps" fill="#22c55e" />
-        </BarChart>
-      </ResponsiveContainer>
+    <CardContent className="h-64 items-center">
+      <Bar
+  data={{
+    labels: ['Last Month', 'This Month'],
+    datasets: [
+      {
+        label: 'Applications',
+        data: [lastMonthApps, thisMonthApps],
+        backgroundColor: ['#3b82f6', '#22c55e'],
+      },
+    ],
+  }}
+  options={{
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: true },
+    },
+    scales: {
+      y: { beginAtZero: true },
+    },
+  }}
+/>
+
     </CardContent>
   </Card>
 </div>

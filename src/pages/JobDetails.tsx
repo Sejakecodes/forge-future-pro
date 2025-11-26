@@ -27,7 +27,7 @@ const jobs = [
   {
     id: 1,
     title: "Full-Stack Developer for E-commerce Platform",
-    budget: "$5,000 - $8,000",
+    budget: "R5,000 - R8,000",
     duration: "2-3 months",
     location: "Remote",
     tags: ["React", "Node.js", "MongoDB", "Stripe"],

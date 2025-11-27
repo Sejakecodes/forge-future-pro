@@ -11,7 +11,8 @@ import {
   Users,
   Sparkles,
 } from "lucide-react";
-
+import { useScroll, useTransform, useSpring} from "framer-motion";
+import { useRef } from "react"
 // Local image uploaded by the user (developer instruction)
 const heroImg = "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61";
 
@@ -23,6 +24,21 @@ const brands = [
 ];
 
 export default function LandingFull() {
+ const sectionRef = useRef(null);
+
+  // Capture scroll progress for the whole section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  // === VIDEO TRANSFORMS ===
+  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 0.55]);
+  const x = useTransform(scrollYProgress, [0, 0.4], ["0%", "-35%"]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.4], ["0px", "28px"]);
+  const blur = useTransform(scrollYProgress, [0, 0.4], ["0px", "6px"]);
+  const opacity = useTransform(scrollYProgress, [0.4, 0.55], [1, 0]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground">
       {/* NAV */}
@@ -240,6 +256,110 @@ export default function LandingFull() {
           </div>
         </div>
       </section>
+      {/* WHY CHOOSE US – Parallax Split Scroll Section */}
+ 
+
+
+ 
+
+
+    <section ref={sectionRef} className="relative w-full mt-20">
+
+      {/* === FULL-WIDTH VIDEO THAT MORPHS INTO LEFT SIDE === */}
+      <motion.div
+        style={{
+          scale,
+          x,
+          borderRadius,
+          filter: blur,
+          opacity,
+        }}
+        className="w-full h-[80vh] overflow-hidden fixed top-0 left-0 right-0 z-20 pointer-events-none"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+          src="https://www.pexels.com/download/video/34883472/"
+        />
+      </motion.div>
+
+      {/* === SPACER so scroll works === */}
+      <div className="h-[80vh]" />
+
+      {/* === MAIN SECTION SPLIT AFTER TRANSITION === */}
+      <div className="relative grid lg:grid-cols-2 min-h-[160vh]">
+
+        {/* Left Final Sticky Video Panel */}
+        <div className="sticky top-0 h-screen hidden lg:block z-10 rounded-r-3xl overflow-hidden shadow-xl">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            src="https://www.pexels.com/download/video/34883472/"
+          />
+        </div>
+
+        {/* TEXT CONTENT */}
+        <div className="flex flex-col justify-center px-8 py-20 space-y-24 relative z-0">
+
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ amount: 0.3, once: false }}
+          >
+            <h2 className="text-4xl font-extrabold">Why Choose JobFine?</h2>
+            <p className="text-muted-foreground text-lg mt-4">
+              We match freelancers with top companies globally using AI-driven recommendations.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            viewport={{ amount: 0.3, once: false }}
+          >
+            <h3 className="text-3xl font-bold">AI Talent Matching</h3>
+            <p className="text-muted-foreground text-lg mt-3">
+              Our AI scans skills and experience to match you to opportunities instantly.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            viewport={{ amount: 0.3, once: false }}
+          >
+            <h3 className="text-3xl font-bold">Trusted by Leading Brands</h3>
+            <p className="text-muted-foreground text-lg mt-3">
+              Work with companies like LinkedIn, Pinterest, Behance, and more.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            viewport={{ amount: 0.3, once: false }}
+          >
+            <h3 className="text-3xl font-bold">Fast, Verified, Secure</h3>
+            <p className="text-muted-foreground text-lg mt-3">
+              Verified clients, secure escrow, and guaranteed payouts.
+            </p>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+
+
 
       {/* Testimonials */}
       <section id="testimonials" className="py-16 bg-purple-50/20">

@@ -26,19 +26,17 @@ const brands = [
 export default function LandingFull() {
  const sectionRef = useRef(null);
 
-  // Capture scroll progress for the whole section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end start"],
   });
 
-  // === VIDEO TRANSFORMS ===
-  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 0.55]);
-  const x = useTransform(scrollYProgress, [0, 0.4], ["0%", "-35%"]);
-  const borderRadius = useTransform(scrollYProgress, [0, 0.4], ["0px", "28px"]);
-  const blur = useTransform(scrollYProgress, [0, 0.4], ["0px", "6px"]);
-  const opacity = useTransform(scrollYProgress, [0.4, 0.55], [1, 0]);
-
+  // Smooth transitions
+  const scale = useTransform(scrollYProgress, [0, 0.35], [1, 0.55]);
+  const x = useTransform(scrollYProgress, [0, 0.35], ["0%", "-32%"]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.35], ["0px", "28px"]);
+  const blur = useTransform(scrollYProgress, [0, 0.35], ["0px", "6px"]);
+  const opacity = useTransform(scrollYProgress, [0.35, 0.45], [1, 0]);
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground">
       {/* NAV */}
@@ -265,7 +263,7 @@ export default function LandingFull() {
 
     <section ref={sectionRef} className="relative w-full mt-20">
 
-      {/* === FULL-WIDTH VIDEO THAT MORPHS INTO LEFT SIDE === */}
+      {/* === FULL WIDTH VIDEO (but INSIDE the section!) === */}
       <motion.div
         style={{
           scale,
@@ -274,7 +272,14 @@ export default function LandingFull() {
           filter: blur,
           opacity,
         }}
-        className="w-full h-[80vh] overflow-hidden fixed top-0 left-0 right-0 z-20 pointer-events-none"
+        className="
+          w-full
+          h-[80vh]
+          overflow-hidden
+          sticky top-0
+          z-10
+          bg-black
+        "
       >
         <video
           autoPlay
@@ -286,14 +291,11 @@ export default function LandingFull() {
         />
       </motion.div>
 
-      {/* === SPACER so scroll works === */}
-      <div className="h-[80vh]" />
+      {/* Main Split Content */}
+      <div className="relative grid lg:grid-cols-2 min-h-[160vh] mt-10">
 
-      {/* === MAIN SECTION SPLIT AFTER TRANSITION === */}
-      <div className="relative grid lg:grid-cols-2 min-h-[160vh]">
-
-        {/* Left Final Sticky Video Panel */}
-        <div className="sticky top-0 h-screen hidden lg:block z-10 rounded-r-3xl overflow-hidden shadow-xl">
+        {/* LEFT PANEL (This is where video ends up) */}
+        <div className="sticky top-0 h-screen hidden lg:block rounded-r-3xl overflow-hidden shadow-xl">
           <video
             autoPlay
             muted
@@ -304,54 +306,54 @@ export default function LandingFull() {
           />
         </div>
 
-        {/* TEXT CONTENT */}
-        <div className="flex flex-col justify-center px-8 py-20 space-y-24 relative z-0">
+        {/* RIGHT PANEL CONTENT */}
+        <div className="flex flex-col justify-center px-8 py-20 space-y-24">
 
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            viewport={{ amount: 0.3, once: false }}
+            viewport={{ amount: 0.3 }}
           >
             <h2 className="text-4xl font-extrabold">Why Choose JobFine?</h2>
             <p className="text-muted-foreground text-lg mt-4">
-              We match freelancers with top companies globally using AI-driven recommendations.
+              We match freelancers with top companies globally using AI-driven matching.
             </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            viewport={{ amount: 0.3, once: false }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ amount: 0.3 }}
           >
             <h3 className="text-3xl font-bold">AI Talent Matching</h3>
             <p className="text-muted-foreground text-lg mt-3">
-              Our AI scans skills and experience to match you to opportunities instantly.
+              Our AI scans your experience to instantly connect you with opportunities.
             </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
-            viewport={{ amount: 0.3, once: false }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ amount: 0.3 }}
           >
             <h3 className="text-3xl font-bold">Trusted by Leading Brands</h3>
             <p className="text-muted-foreground text-lg mt-3">
-              Work with companies like LinkedIn, Pinterest, Behance, and more.
+              Work with global brands and top startups.
             </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            viewport={{ amount: 0.3, once: false }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            viewport={{ amount: 0.3 }}
           >
-            <h3 className="text-3xl font-bold">Fast, Verified, Secure</h3>
+            <h3 className="text-3xl font-bold">Fast, Secure, Verified</h3>
             <p className="text-muted-foreground text-lg mt-3">
-              Verified clients, secure escrow, and guaranteed payouts.
+              Secure contracts, verified clients, and guaranteed payments.
             </p>
           </motion.div>
 

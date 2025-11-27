@@ -11,6 +11,7 @@ import {
   Users,
   Sparkles,
 } from "lucide-react";
+import ScrollReveal from '@/components/layout/ScrollReveal';
 import { useScroll, useTransform, useSpring} from "framer-motion";
 import { useRef } from "react"
 // Local image uploaded by the user (developer instruction)
@@ -258,7 +259,6 @@ export default function LandingFull() {
  
 
 
- 
 
 
     <section ref={sectionRef} className="relative w-full mt-20">
@@ -360,7 +360,19 @@ export default function LandingFull() {
         </div>
       </div>
     </section>
+   <section id="jobs" className="py-50 bg-white">
+     <ScrollReveal
+  baseOpacity={0}
+  enableBlur={true}
+  baseRotation={5}
+  blurStrength={10}
+>
+  When does a man die? When he is hit by a bullet? No! When he suffers a disease?
+  No! When he ate a soup made out of a poisonous mushroom?
+  No! A man dies when he is forgotten!
+</ScrollReveal>
 
+</section>
 
 
       {/* Testimonials */}

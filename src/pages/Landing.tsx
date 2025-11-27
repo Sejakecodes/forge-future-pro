@@ -32,12 +32,19 @@ export default function LandingFull() {
     offset: ["start start", "end start"],
   });
 
-  // Smooth transitions
+  // Full-width video transforms
   const scale = useTransform(scrollYProgress, [0, 0.35], [1, 0.55]);
   const x = useTransform(scrollYProgress, [0, 0.35], ["0%", "-32%"]);
   const borderRadius = useTransform(scrollYProgress, [0, 0.35], ["0px", "28px"]);
   const blur = useTransform(scrollYProgress, [0, 0.35], ["0px", "6px"]);
-  const opacity = useTransform(scrollYProgress, [0.35, 0.45], [1, 0]);
+
+  // FULL WIDTH video opacity (fade out)
+  const videoOpacity = useTransform(scrollYProgress, [0.30, 0.45], [1, 0]);
+
+  // LEFT PANEL video opacity (fade in)
+  const leftPanelOpacity = useTransform(scrollYProgress, [0.30, 0.45], [0, 1]);
+
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground">
       {/* NAV */}
@@ -261,25 +268,18 @@ export default function LandingFull() {
 
 
 
-    <section ref={sectionRef} className="relative w-full mt-20">
+   <section ref={sectionRef} className="relative w-full mt-20">
 
-      {/* === FULL WIDTH VIDEO (but INSIDE the section!) === */}
+      {/* === FULL WIDTH VIDEO === */}
       <motion.div
         style={{
           scale,
           x,
           borderRadius,
-          filter: blur,
-          opacity,
+          filter: `blur(${blur.get()})`,
+          opacity: videoOpacity,
         }}
-        className="
-          w-full
-          h-[80vh]
-          overflow-hidden
-          sticky top-0
-          z-10
-          bg-black
-        "
+        className="w-full h-[80vh] overflow-hidden sticky top-0 z-20 bg-black"
       >
         <video
           autoPlay
@@ -291,11 +291,14 @@ export default function LandingFull() {
         />
       </motion.div>
 
-      {/* Main Split Content */}
+      {/* === SPLIT CONTENT AREA === */}
       <div className="relative grid lg:grid-cols-2 min-h-[160vh] mt-10">
 
-        {/* LEFT PANEL (This is where video ends up) */}
-        <div className="sticky top-0 h-screen hidden lg:block rounded-r-3xl overflow-hidden shadow-xl">
+        {/* LEFT PANEL VIDEO — FADES IN */}
+        <motion.div
+          style={{ opacity: leftPanelOpacity }}
+          className="sticky top-0 h-screen hidden lg:block rounded-r-3xl overflow-hidden shadow-xl"
+        >
           <video
             autoPlay
             muted
@@ -304,63 +307,20 @@ export default function LandingFull() {
             className="w-full h-full object-cover"
             src="https://www.pexels.com/download/video/34883472/"
           />
-        </div>
+        </motion.div>
 
         {/* RIGHT PANEL CONTENT */}
         <div className="flex flex-col justify-center px-8 py-20 space-y-24">
 
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ amount: 0.3 }}
-          >
-            <h2 className="text-4xl font-extrabold">Why Choose JobFine?</h2>
-            <p className="text-muted-foreground text-lg mt-4">
-              We match freelancers with top companies globally using AI-driven matching.
-            </p>
-          </motion.div>
+         <motion.div initial={{ opacity: 0, x: 80 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ amount: 0.3 }} > <h2 className="text-4xl font-extrabold">Why Choose JobFine?</h2> <p className="text-muted-foreground text-lg mt-4"> We match freelancers with top companies globally using AI-driven matching. </p> </motion.div> <motion.div initial={{ opacity: 0, x: 80 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ amount: 0.3 }} > <h3 className="text-3xl font-bold">AI Talent Matching</h3> <p className="text-muted-foreground text-lg mt-3"> Our AI scans your experience to instantly connect you with opportunities. </p> </motion.div> <motion.div initial={{ opacity: 0, x: 80 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} viewport={{ amount: 0.3 }} > <h3 className="text-3xl font-bold">Trusted by Leading Brands</h3> <p className="text-muted-foreground text-lg mt-3"> Work with global brands and top startups. </p> </motion.div> <motion.div initial={{ opacity: 0, x: 80 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.3 }} viewport={{ amount: 0.3 }} > <h3 className="text-3xl font-bold">Fast, Secure, Verified</h3> <p className="text-muted-foreground text-lg mt-3"> Secure contracts, verified clients, and guaranteed payments. </p> </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ amount: 0.3 }}
-          >
-            <h3 className="text-3xl font-bold">AI Talent Matching</h3>
-            <p className="text-muted-foreground text-lg mt-3">
-              Our AI scans your experience to instantly connect you with opportunities.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
-          >
-            <h3 className="text-3xl font-bold">Trusted by Leading Brands</h3>
-            <p className="text-muted-foreground text-lg mt-3">
-              Work with global brands and top startups.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            viewport={{ amount: 0.3 }}
-          >
-            <h3 className="text-3xl font-bold">Fast, Secure, Verified</h3>
-            <p className="text-muted-foreground text-lg mt-3">
-              Secure contracts, verified clients, and guaranteed payments.
-            </p>
-          </motion.div>
+          {/* ...other panel items ... */}
 
         </div>
       </div>
     </section>
-   <section id="jobs" className="py-50 bg-white">
+
+   <section id="jobs" className="py-56 bg-white">
      <ScrollReveal
   baseOpacity={0}
   enableBlur={true}

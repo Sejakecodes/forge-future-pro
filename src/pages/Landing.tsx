@@ -54,13 +54,13 @@ export default function LandingFull() {
   const scene2Y = useTransform(scrollYProgress, [0.33, 0.66], ["100%", "0%"]);
   const scene3Y = useTransform(scrollYProgress, [0.66, 1], ["100%", "0%"]);
   return (
-    <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground">
+    <div className="min-h-screen container bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground ">
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border/40">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Sparkles className="h-7 w-7 text-foreground" />
-            <span className="font-bold text-xl md:text-2xl">JobFine</span>
+            
+            <span className="font-bold text-xl md:text-2xl"></span>
           </div>
 
           <div className="hidden lg:flex items-center gap-8 text-sm text-muted-foreground">
@@ -88,9 +88,8 @@ export default function LandingFull() {
             {/* Left: copy */}
             <div className="lg:col-span-6 space-y-6">
               <Badge className="bg-background border border-border/60 rounded-full px-4 py-1">Why choose us</Badge>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
-                Many Top Companies
-                <br /> Posted Here
+              <h1 className="text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+                Many Top Companies Posted Here
               </h1>
               <p className="text-lg text-muted-foreground max-w-xl">
                 Discover opportunities from leading companies across various industries. Our platform hosts job postings from top-tier organizations, giving freelancers access to high-quality projects and reputable clients.
@@ -115,8 +114,8 @@ export default function LandingFull() {
               </div>
 
               {/* Floating search card like image */}
-              <div className="mt-8 relative w-full max-w-md">
-                <div className="absolute -top-6 right-0 w-[420px] shadow-xl rounded-2xl bg-white p-4 border">
+              <div className="mt-1 relative w-full max-w-md">
+                <div className="absolute top-0 left-0 right-0 w-[420px] shadow-xl rounded-2xl bg-white p-4 border">
                   <div className="flex items-center gap-2 justify-between">
                     <div className="flex items-center gap-3">
                       <img src={heroImg} alt="company" className="w-10 h-10 rounded-md object-cover" />
@@ -170,17 +169,7 @@ export default function LandingFull() {
                 <div className="text-xs text-muted-foreground mt-2">R40/hr • Remote</div>
               </div>
 
-              <div className="absolute right-6 bottom-6 w-72 shadow-lg rounded-2xl bg-white p-4 border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm text-muted-foreground">Top Company</div>
-                    <div className="font-semibold">Behance</div>
-                  </div>
-                  <div className="text-green-600 font-semibold">Remote</div>
-                </div>
-
-                <div className="mt-3 text-sm text-muted-foreground">Design • 2d ago</div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -328,7 +317,7 @@ export default function LandingFull() {
       </div>
     </section>
 
-   <section id="jobs" className="py-56 bg-white">
+   <section id="jobs" className="py-50 bg-white">
      <ScrollReveal
   baseOpacity={0}
   enableBlur={true}
@@ -360,7 +349,7 @@ export default function LandingFull() {
 
         <img
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
-          className="h-[450px] w-full object-cover rounded-3xl shadow-2xl"
+          className="h-[450px] w-full object-cover  shadow-2xl"
         />
       </motion.div>
 
@@ -379,7 +368,7 @@ export default function LandingFull() {
 
         <img
           src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
-          className="h-[450px] w-full object-cover rounded-3xl shadow-2xl"
+          className="h-[450px] w-full object-cover  shadow-2xl"
         />
       </motion.div>
 
@@ -398,7 +387,7 @@ export default function LandingFull() {
 
         <img
           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-          className="h-[450px] w-full object-cover rounded-3xl shadow-2xl"
+          className="h-[450px] w-full object-cover  shadow-2xl"
         />
       </motion.div>
 
@@ -448,23 +437,79 @@ export default function LandingFull() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t bg-white">
-        <div className="container mx-auto px-6 text-center">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Sparkles className="h-6 w-6" />
-              <div className="font-bold">JobFine</div>
-            </div>
-            <div className="text-sm text-muted-foreground">© 2025 JobFine. All rights reserved.</div>
-            <div className="flex items-center gap-2">
-              {brands.map((b) => (
-                <div key={b.name} className="text-xs text-muted-foreground">{b.name}</div>
-              ))}
-            </div>
-          </div>
+ {/* Modern Footer */}
+<footer className="bg-gray-50 border-t mt-20">
+  {/* Top Gradient Divider */}
+  <div className="h-[2px] w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+
+  <div className="container mx-auto px-6 py-16">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+      {/* Brand */}
+      <div>
+        <div className="flex items-center gap-3">
+          <Sparkles className="h-7 w-7 text-purple-600" />
+          <h3 className="text-2xl font-extrabold tracking-tight">
+            JobFine
+          </h3>
         </div>
-      </footer>
+        <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+          Empowering freelancers and companies with smart AI-driven talent matching.
+        </p>
+
+        {/* Social Icons */}
+       
+      </div>
+
+      {/* Links */}
+      <div>
+        <h4 className="font-semibold text-lg mb-4">Platform</h4>
+        <ul className="space-y-3 text-muted-foreground text-sm">
+          <li className="hover:text-black transition cursor-pointer">Browse Freelancers</li>
+          <li className="hover:text-black transition cursor-pointer">Find Work</li>
+          <li className="hover:text-black transition cursor-pointer">Categories</li>
+          <li className="hover:text-black transition cursor-pointer">Pricing</li>
+        </ul>
+      </div>
+
+      {/* Support */}
+      <div>
+        <h4 className="font-semibold text-lg mb-4">Support</h4>
+        <ul className="space-y-3 text-muted-foreground text-sm">
+          <li className="hover:text-black transition cursor-pointer">Help Center</li>
+          <li className="hover:text-black transition cursor-pointer">Safety Guidelines</li>
+          <li className="hover:text-black transition cursor-pointer">Report an Issue</li>
+          <li className="hover:text-black transition cursor-pointer">FAQ</li>
+        </ul>
+      </div>
+
+      {/* Company */}
+      <div>
+        <h4 className="font-semibold text-lg mb-4">Company</h4>
+        <ul className="space-y-3 text-muted-foreground text-sm">
+          <li className="hover:text-black transition cursor-pointer">About Us</li>
+          <li className="hover:text-black transition cursor-pointer">Our Mission</li>
+          <li className="hover:text-black transition cursor-pointer">Careers</li>
+          <li className="hover:text-black transition cursor-pointer">Contact</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom Bar */}
+  <div className="border-t">
+    <div className="container mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between text-sm text-muted-foreground">
+      <p>© 2025 JobFine. All rights reserved.</p>
+
+      <div className="flex items-center gap-4 mt-3 md:mt-0">
+        <span className="cursor-pointer hover:text-black transition">Privacy Policy</span>
+        <span className="cursor-pointer hover:text-black transition">Terms of Service</span>
+        <span className="cursor-pointer hover:text-black transition">Cookies</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
     </div>
   );
 }

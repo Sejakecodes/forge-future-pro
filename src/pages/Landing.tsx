@@ -25,6 +25,9 @@ const brands = [
 ];
 
 export default function LandingFull() {
+   const wrapperRef = useRef(null);
+
+
  const sectionRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -44,7 +47,12 @@ export default function LandingFull() {
   // LEFT PANEL video opacity (fade in)
   const leftPanelOpacity = useTransform(scrollYProgress, [0.30, 0.45], [0, 1]);
 
-
+  
+  // For upward stacking motion
+// Scenes sliding IN over each other
+  const scene1Y = useTransform(scrollYProgress, [0, 0.33], ["0%", "-20%"]);
+  const scene2Y = useTransform(scrollYProgress, [0.33, 0.66], ["100%", "0%"]);
+  const scene3Y = useTransform(scrollYProgress, [0.66, 1], ["100%", "0%"]);
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-purple-50/30 text-foreground">
       {/* NAV */}
@@ -114,7 +122,7 @@ export default function LandingFull() {
                       <img src={heroImg} alt="company" className="w-10 h-10 rounded-md object-cover" />
                       <div>
                         <div className="font-semibold">Pinterest</div>
-                        <div className="text-sm text-muted-foreground">$50.00/hr • Remote</div>
+                        <div className="text-sm text-muted-foreground">R50.00/hr • Remote</div>
                       </div>
                     </div>
                     <Button size="sm" variant="ghost">Apply</Button>
@@ -143,7 +151,7 @@ export default function LandingFull() {
                       </div>
                       <div className="text-right">
                         <div className="text-sm text-muted-foreground">Salary</div>
-                        <div className="font-semibold">$50/hr</div>
+                        <div className="font-semibold">R50/hr</div>
                       </div>
                     </div>
 
@@ -159,7 +167,7 @@ export default function LandingFull() {
               <div className="absolute left-6 top-6 w-56 shadow-lg rounded-2xl bg-white p-3 border">
                 <div className="text-xs text-muted-foreground">Featured</div>
                 <div className="font-semibold">LinkedIn • UX Writer</div>
-                <div className="text-xs text-muted-foreground mt-2">$40/hr • Remote</div>
+                <div className="text-xs text-muted-foreground mt-2">R40/hr • Remote</div>
               </div>
 
               <div className="absolute right-6 bottom-6 w-72 shadow-lg rounded-2xl bg-white p-4 border">
@@ -246,7 +254,7 @@ export default function LandingFull() {
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-muted-foreground">Remote</div>
-                      <div className="font-semibold">$24/hr</div>
+                      <div className="font-semibold">R24/hr</div>
                     </div>
                   </div>
                 </CardHeader>
@@ -333,6 +341,71 @@ export default function LandingFull() {
 </ScrollReveal>
 
 </section>
+
+{/* === ULTRA CINEMATIC STACKED SCROLL SECTION === */}
+<section ref={wrapperRef} className="relative w-full h-[300vh]">
+
+      {/* === SCENE 1 (BOTTOM) === */}
+      <motion.div
+        style={{ y: scene1Y }}
+        className="sticky top-0 h-screen grid lg:grid-cols-2 px-20 
+                   items-center bg-white z-10"
+      >
+        <div>
+          <h2 className="text-5xl font-bold mb-6">Build Your Team Faster</h2>
+          <p className="text-lg text-muted-foreground">
+            Elite freelancers with AI-powered matching.
+          </p>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
+          className="h-[450px] w-full object-cover rounded-3xl shadow-2xl"
+        />
+      </motion.div>
+
+      {/* === SCENE 2 (MIDDLE, should cover Scene 1) === */}
+      <motion.div
+        style={{ y: scene2Y }}
+        className="sticky top-0 h-screen grid lg:grid-cols-2 px-20 
+                   items-center bg-white z-20"
+      >
+        <div>
+          <h2 className="text-5xl font-bold mb-6">Global Reach</h2>
+          <p className="text-lg text-muted-foreground">
+            Verified international talent with seamless onboarding.
+          </p>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
+          className="h-[450px] w-full object-cover rounded-3xl shadow-2xl"
+        />
+      </motion.div>
+
+      {/* === SCENE 3 (TOP — covers Scene 2) === */}
+      <motion.div
+        style={{ y: scene3Y }}
+        className="sticky top-0 h-screen grid lg:grid-cols-2 px-20
+                   items-center bg-white z-30"
+      >
+        <div>
+          <h2 className="text-5xl font-bold mb-6">Modern Workflow</h2>
+          <p className="text-lg text-muted-foreground">
+            Faster collaboration. Smarter hiring. Better teams.
+          </p>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+          className="h-[450px] w-full object-cover rounded-3xl shadow-2xl"
+        />
+      </motion.div>
+
+    </section>
+
+
+
 
 
       {/* Testimonials */}
